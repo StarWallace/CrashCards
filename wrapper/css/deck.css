@@ -12,7 +12,7 @@
 #deckList .browseItem {
     border: 1px solid #dbdbdb;
     min-height: 75px;
-    background-color: #e4e4e4;
+    /*background-color: #e4e4e4;
     /*margin: 5px;*/
     margin-top: 15px;
 }
@@ -68,7 +68,7 @@
     ****************/
 
 .deckTag {
-    background-color: #e4e4e4;
+   /* background-color: #e4e4e4;*/
     color: #040404;
     width: 100%;
     position: absolute;
@@ -111,7 +111,7 @@
     float: right;
     height: 75px;
     width: 200px;
-    background-color: #bbbbbb;
+   /* background-color: #bbbbbb;*/
 }
 
 
