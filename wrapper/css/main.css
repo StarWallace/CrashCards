@@ -1,0 +1,166 @@
+﻿    /***************
+        ELEMENTS
+    ***************/
+    
+body {
+    font-family: helvetica, sans-serif;
+    font-size: 1em;
+    background-color: #ffff99;
+    /*background-repeat: repeat-y;*/
+	margin: 0;
+	padding: 0;
+}
+
+div.link:hover {
+    background-color: #6b6bb3;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+    /********************
+        PAGE TEMPLATE
+    ********************/
+    
+#wrapper {
+    top: 20px;
+    width: 100%;
+    min-width: 1000px;
+    position: relative;
+}
+
+#content {
+    width: 760px;
+    max-width: 1200px;
+    min-height: 400px;
+    padding-top: 15px;
+}
+
+#footer {
+    text-align: right;
+    padding: 10px 20px 10px 20px;
+    /*border: 1px solid #dbdbdb;*/
+}
+
+    /**************
+        TOP BAR
+    **************/
+    
+#topBar {
+    top: 0px;
+    left: 50%;
+	margin-left: -380px;
+    width: 760px;
+    /*min-width: 1000px;*/
+    height: 3em;
+    line-height: 3em;
+    position: fixed;
+    z-index: 100;
+	box-shadow: 0 0 10px 3px #888888;
+}
+
+#userBar {
+    /*border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;*/
+    width: 100%;
+    /*min-width: 1020px;
+    max-width: 1300px;*/
+    height: 100%;
+}
+
+#userBar .banner {
+    width: 300px;
+    float: left;
+    height: 100%;
+    background-image: url("../images/banner.png");
+}
+
+#userBar .controlBar {
+    float: right;
+    height: 100%;
+}
+
+#userBar .control {
+    width: 50px;
+    float: left;
+    height: 100%;
+}
+
+.control#yourCards {
+    background-image: url("../images/controls/yourCards.png");
+}
+
+.control#settings {
+    background-image: url("../images/controls/settings.png");
+}
+
+.control#logout {
+    background-image: url("../images/controls/logout.png");
+}
+
+    /*************
+        BROWSE
+    *************/
+    
+#browseNav {
+    height: 2em;
+    line-height: 2em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*border: 1px solid #dbdbdb;*/
+}
+
+#navFilters {
+    float: left;
+}
+
+#navControls {
+    float: right;
+}
+
+    /*********************
+        COMMON CLASSES
+    *********************/
+    
+.centred {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spaced {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.white {
+    background-color: #ffffff;
+    color: #000044;
+}
+
+.white:hover {
+	box-shadow: 0 0 10px #888888;
+}
+
+.halfRow {
+    height: 50%;
+}
+
+.floatLine {
+    clear: both;
+}
+
+.control {
+    cursor: pointer;
+}
+
+.ajaxLoader {
+    background-image: url("images/ajax.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+}
