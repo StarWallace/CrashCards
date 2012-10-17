@@ -6,21 +6,19 @@ body {
     font-family: helvetica, sans-serif;
     font-size: 1em;
     background-color: #ffff99;
-    /*background-repeat: repeat-y;*/
-	margin: 0;
-	padding: 0;
+    background-repeat: repeat-y;
 }
 
 div.link:hover {
-    /*background-color: #6b6bb3;*/
-    color: #6B6BB3;
+    background-color: #6b6bb3;
+    color: #ffffff;
     cursor: pointer;
 }
 
 a:link,
 a:visited {
     text-decoration: none;
-    color: #9999FF;
+    color: inherit;
 }
 
     /********************
@@ -35,17 +33,16 @@ a:visited {
 }
 
 #content {
-    width: 960px;
+    width: 90%;
     max-width: 1200px;
     min-height: 400px;
-    padding-top: 15px;
+    padding-top: 20px;
 }
 
 #footer {
     text-align: right;
     padding: 10px 20px 10px 20px;
-	margin: 15px 0 0 0;
-    /*border: 1px solid #dbdbdb;*/
+    border: 1px solid #dbdbdb;
 }
 
     /**************
@@ -54,25 +51,23 @@ a:visited {
     
 #topBar {
     top: 0px;
-    left: 50%;
-	margin-left: -480px;
-    width: 960px;
-    /*min-width: 1000px;*/
+    left: 0px;
+    width: 100%;
+    min-width: 1000px;
     height: 3em;
     line-height: 3em;
     position: fixed;
-    z-index: 100;	
+    z-index: 100;
 }
 
 #userBar {
-    /*border-left: 1px solid black;
+    border-left: 1px solid black;
     border-right: 1px solid black;
-    border-bottom: 1px solid black;*/
+    border-bottom: 1px solid black;
     width: 100%;
-    /*min-width: 1020px;
-    max-width: 1300px;*/
+    min-width: 1020px;
+    max-width: 1300px;
     height: 100%;
-	box-shadow: 0 0 10px 0px #888888;
 }
 
 #userBar .banner {
@@ -114,7 +109,7 @@ a:visited {
     line-height: 2em;
     padding-top: 5px;
     padding-bottom: 5px;
-    /*border: 1px solid #dbdbdb;*/
+    border: 1px solid #dbdbdb;
 }
 
 #navFilters {
@@ -135,17 +130,13 @@ a:visited {
 }
 
 .spaced {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .white {
     background-color: #ffffff;
     color: #000044;
-}
-
-.white:hover {
-	box-shadow: 0 0 10px #888888;
 }
 
 .halfRow {

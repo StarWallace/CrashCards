@@ -1,4 +1,4 @@
-﻿<div class="top fixed centred" id="topBar">
+﻿<div class="top fixed" id="topBar">
     <div class="centred white" id="userBar">
         <div class="banner" title="CrashCards"></div>
         <div class="controlBar">
