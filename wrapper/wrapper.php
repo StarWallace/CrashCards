@@ -6,7 +6,12 @@
 ?>
 <!-- BEGIN THEME -->
 <?php require 'opener.php'; ?>
-<?php require 'userbar.php'; ?>
+<?php
+//  if (logged in)
+        require 'userbar.php';
+//  else
+//      require 'loginbar.php';
+?>
 
 <div class="centred" id="wrapper">
 

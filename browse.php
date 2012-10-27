@@ -21,6 +21,8 @@
     
 ?>
 
+<link rel="stylesheet" type="text/css" href="wrapper/css/deck.css"/>
+
 <div class="white spaced" id="browseNav">
 	<div id="navFilters">
 		<select id="campus">
