@@ -46,11 +46,11 @@
         <div id="score">0%</div>
     </div>
     <div class="white options">
-        <input type="checkbox" id="randomOrder"/>Random order
+        <input type="checkbox" id="randomOrder"/><label for="randomOrder" >Random order</label>
         <br/>
-        <input type="checkbox" id="repeatUntilPerfect"/>Repeat until perfect score
+        <input type="checkbox" id="repeatUntilPerfect"/><label for="repeatUntilPerfect" >Repeat until perfect score</label>
         <div id="repeatCorrectDiv">
-            <input type="checkbox" id="repeatCorrect"/>Repeat correct answers
+            <input type="checkbox" id="repeatCorrect"/><label for="repeatCorrect" >Repeat correct answers</label>
         </div>
     </div>
 </div>
