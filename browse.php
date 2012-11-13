@@ -60,55 +60,55 @@
 	?>
 	
 	<div class="browseItem">
-			<div class="vote">
-				<div class="up control"></div>
-				<div class="score">
-					<?php echo $deck->score; ?>
-				</div>
-				<div class="down control"></div>
-			</div>
-			<div class="deckTagHolder">
-				<div class="deckTag">
-					<a href="
-						<?php echo $deck->link; ?>
-					">
-						<div class="halfRow link">
-							<div class="title">
-								<?php echo $deck->title; ?>
-							</div>
-						</div>
-					</a>
-					<div class="halfRow">
-						<div class="info">
-							<br/>
-							<?php echo "$deck->department $deck->course - $deck->term $deck->year - $deck->campus"; ?>
-						</div>
-						<div class="tags">
-							<br/>
-							<?php echo implode(", ", $deck->tags); ?>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="userTag">
-				<a href="
-					<?php echo $deck->creator->link; ?>
-				">
-					<div id="userName" class="halfRow link">
-						<div>
-							<strong>
-								<?php echo $deck->creator->name; ?>
-							</strong>
-						</div>
-					</div>
-				</a>
-				<div class="halfRow">
-					<div>
-						<?php echo $deck->creator->rating; ?>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="vote">
+            <div class="up control"></div>
+            <div class="score">
+                <?php echo $deck->score; ?>
+            </div>
+            <div class="down control"></div>
+        </div>
+        <div class="deckTagHolder">
+            <div class="deckTag">
+                <a href="
+                    <?php echo $deck->link; ?>
+                ">
+                    <div class="halfRow link">
+                        <div class="title">
+                            <?php echo $deck->title; ?>
+                        </div>
+                    </div>
+                </a>
+                <div class="halfRow">
+                    <div class="info">
+                        <br/>
+                        <?php echo "$deck->department $deck->course - $deck->term $deck->year - $deck->campus"; ?>
+                    </div>
+                    <div class="tags">
+                        <br/>
+                        <?php echo implode(", ", $deck->tags); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="userTag">
+            <a href="
+                <?php echo $deck->creator->link; ?>
+            ">
+                <div id="userName" class="halfRow link">
+                    <div>
+                        <strong>
+                            <?php echo $deck->creator->name; ?>
+                        </strong>
+                    </div>
+                </div>
+            </a>
+            <div class="halfRow">
+                <div>
+                    <?php echo $deck->creator->rating; ?>
+                </div>
+            </div>
+        </div>
+	</div>
 	
 	<?php
 		}
