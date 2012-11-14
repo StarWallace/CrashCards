@@ -38,6 +38,8 @@ class User {
 	**/
 	function FillUser($uid, $email, $name="", $alias="", $campus="")
 	{
+		//all this does is strips off any special characters that might cause problems in
+		//SQL, php, or html
 		$this->uid = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($uid)));
 		$this->email = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($email)));		
 		$this->name = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($name)));
@@ -86,17 +88,17 @@ class User {
 	
 	/************************************************************
 	*FUNCTION:    CheckDupUser
-	*PURPOSE:     Call to check if the passed in email is in use by an existing user
-	*PARAMS:      email - the email to check
+	*PURPOSE:     Call to check if the user object's email is in use by an existing user
+	*							 This function assumes that the email attribute is set
 	*RETURN:      True on duplicate, false on unused email address
 	************************************************************/
-	function CheckDupUser($email)
+	function CheckDupUser()
 	{
 		$result = false;
 		$qryUser = $this->db->selectQuery(
 				"uid",
 				"ccUsers",
-				"email = '" . $email . "'" );
+				"email = '" . $this->email . "'" );
 		if ($qryUser->num_rows > 0)
 		{
 			$result = true;
@@ -111,11 +113,11 @@ class User {
 	**/
 	function Register($email, $pass, $passconf, $name="", $alias="", $campus="")
 	{
+		//place the passed in info in the user object
+		$this->FillUser("dummy id", $email, $name, $alias, $campus);
 		//check to see if email already in use
-		if ($this->CheckDupUser($email) === false) 
+		if ($this->CheckDupUser() === false) 
 		{
-			//place the passed in info in the user object
-			$this->FillUser("dummy id", $email, $name, $alias, $campus);
 			//check for any invalid values.
 			$result = $this->ValidateInfo($pass);
 			
@@ -129,8 +131,8 @@ class User {
 				{
 					$qryReg = $this->db->insertQuery(
 						"ccUsers",
-						"email, name, alias, campus, pass",
-						"'" . $email . "', '" . $name . "', '" . $alias . "', '" . $campus . "', '" . $pwHash . "'");
+						"uid, email, name, alias, campus, pass",
+						"NULL, '" . $this->email . "', '" . $this->name . "', '" . $this->alias . "', '" . $this->campus . "', '" . $pwHash . "'");
 					$result = $qryReg;	
 				}
 				else
@@ -155,14 +157,14 @@ class User {
 	*             pass - the the password to check
 	*RETURN:      True on match, error message string otherwise
 	************************************************************/
-	function CheckValidCredentials($email, $pass)
+	function CheckValidCredentials($pass)
 	{
 		$result = false;
 		//query the db for the passed in user name, if found return the stored password hash
 		$qryFindUser = $this->db->selectQuery(
 				"pass",
 				"ccUsers",
-				"email = '" . $email . "'" );
+				"email = '" . $this->email . "'" );
 		//if a user was found with that email address
 		if ($qryFindUser->num_rows > 0 )
 		{
@@ -193,7 +195,9 @@ class User {
 	function Login($email, $pass)
 	{
 		$result = false;
-		$isValid = $this->CheckValidCredentials($email, $pass);
+		//place the passed in email in the user object
+		$this->FillUser("dummy id", $email);
+		$isValid = $this->CheckValidCredentials($pass);
 		
 		//if the user is found to be a valid user
 		if ($isValid === true)
@@ -202,7 +206,7 @@ class User {
 			$qryUser = $this->db->selectQuery(
 				"*",
 				"ccUsers",
-				"email = '" . $email . "'" );
+				"email = '" . $this->email . "'" );
 			$aInfo = $qryUser->fetch_assoc();
 			//insert all DB user data into the php object
 			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias'], $aInfo['campus']);
@@ -218,5 +222,19 @@ class User {
 		return $result;
 	}
 	
+	function Logout()
+	{
+		setcookie("user", "", 0);
+		unset($_COOKIE['user']);
+	}
+	
+	function FreshCookie()
+	{
+		if (isset($_COOKIE['user'])
+		{
+			setcookie("user", serialize($this), time()+3600*24*365);
+			$_COOKIE['user'] = serialize($this);
+		}
+	}
 }
 ?>
