@@ -4,44 +4,176 @@ require_once("SQLAccess.class.php");
 class Deck 
 {
         
-	public $deckid, $creatorid, $year, $title, $coursecode, $prof, $campus, $desc, $pubed;
+	public $deckid, $creatorid, $title, $coursecode, $subject, $desc, $tstamp, $upv, $dnv, $pubed;
 	private $db;
 
-	function __construct()
+	function __construct($deckid="", $creatorid="", $title="", $coursecode="", $subject="", $desc="", $tstamp="", $upv="", $dnv="", $pubed="")
 	{
+		//all cases need this
 		$this->db = new SQLAccess();
-	}
-
-	function __construct($deckid, $creatorid, $year, $title, $coursecode, $prof, $campus, $desc, $pubed)
-	{
-		$this->db = new SQLAccess();
-		$this->FillDeck($deckid, $creatorid, $year, $title, $coursecode, $prof, $campus, $desc, $pubed);
+		//if we have a deckid
+		if ($deckid != "")
+		{
+			//if we have a creator id (assume all other attributes also passed in)
+			if ($creatorid != "")
+			{
+				//fill deck object with all data
+				$this->FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $desc, $tstamp, $upv, $dnv, $pubed);
+			}
+			else //else only the deckid is passed, get the full object from the DB
+			{
+				//get full user data
+				$qryDeck = $this->db->selectQuery(
+					"*",
+					"ccDecks",
+					"deckid = '" . $deckid . "'" );
+				$aInfo = $qryDeck->fetch_assoc();
+				//insert all DB user data into the php object
+				$this->FillDeck($aInfo['deckid'], $aInfo['creatorid'], $aInfo['title'], $aInfo['coursecode'], $aInfo['subject'], $aInfo['desc'], $aInfo['tstamp'], $aInfo['upv'], $aInfo['dnv'], $aInfo['pubed']);
+			}
+		}
 	}
     
-    function FillDeck($deckid, $creatorid, $year, $title, $coursecode, $prof, $campus, $desc, $pubed)
+	/************************************************************
+	*FUNCTION:    FillDeck
+	*PURPOSE:     Fills the deck object with the passed in data strips all special chars and tags for safety
+	************************************************************/
+    function FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $desc, $tstamp, $upv, $dnv, $pubed)
     {
 		//all this does is strips off any special characters that might cause problems in
 		//SQL, php, or html
 		$this->deckid = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($deckid)));
-		$this->creatorid = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($creatorid)));
-		$this->year = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($year)));		
+		$this->creatorid = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($creatorid)));	
 		$this->title = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($title)));
 		$this->coursecode = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($coursecode)));
-		$this->prof = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($prof)));
-		$this->campus = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($campus)));
+		$this->subject = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($subject)));
 		$this->desc = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($desc)));
+		$this->tstamp = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($tstamp)));	
+		$this->upv = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($upv)));
+		$this->dnv = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($dnv)));	
 		$this->pubed = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($pubed)));
     }
-    
+	
+	/************************************************************
+	*FUNCTION:    GetDeckXML
+	*PURPOSE:     returns the XML string of the cards for this deck
+	*NOTE:		  This function assumes that the deck object has its attributes filled
+	*RETURN:      a string with the xml data
+	************************************************************/
     function GetDeckXML()
     {
     	$result = null;
     	if (isset($this->deckid) && isset($this->creatorid))
     	{
-    		$result = "decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
+    		$deckPath = "decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
+			//read the xml fil into a string
+			$result = file_get_contents($deckPath);
     	}
     	return $result;
     }    
+	
+	/************************************************************
+	*FUNCTION:    GetDeckJSON
+	*PURPOSE:     returns the JSON string of the cards for this deck
+	*NOTE:		  This function assumes that the deck object has its attributes filled
+	*RETURN:      a string with the JSON data
+	************************************************************/
+	function GetDeckJSON()
+	{
+		$xmlStr = $this->GetDeckXML();
+		$xmlOb = simplexml_load_string($xmlStr);
+		$xmlArr = objectsIntoArray($xmlOb);
+		$jsonArr['deck'] = $xmlArr['card'];
+		$json = json_encode($arrXml);
+		return $json;
+	}
+	
+	/************************************************************
+	*FUNCTION:    CheckDupUser
+	*PURPOSE:     Call to check if the user object's email is in use by an existing user
+	*							 This function assumes that the email attribute is set
+	*RETURN:      True on duplicate, false on unused email address
+	************************************************************/
+	function SaveDeckXML($xml)
+	{
+		//path string for the deck location and name
+		$deckPath = "decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
+		//open file handler, will be created if it does not exist
+		$fp = fopen($deckpath, "w+");
+		//write xml into file
+		fwrite($fp, $xml);
+		//close file handler
+		fclose($fp);
+	}
+	
+	/************************************************************
+	*FUNCTION:    CheckDupUser
+	*PURPOSE:     Call to check if the user object's email is in use by an existing user
+	*							 This function assumes that the email attribute is set
+	*RETURN:      True on duplicate, false on unused email address
+	************************************************************/
+	function SaveDeckToDB($update=false)
+	{
+		$result = false;
+		//if this is an update save
+		if ($update == true)
+		{
+			$aUpdate = Array();
+			$aUpdate['deckid'] = $this->deckid;
+			$aUpdate['creatorid'] = $this->creatorid;
+			$aUpdate['title'] = $this->title;
+			$aUpdate['coursecode'] = $this->coursecode;
+			$aUpdate['subject'] = $this->prof;
+			$aUpdate['desc'] = $this->campus;
+			$aUpdate['tstamp'] = $this->tstamp;
+			$aUpdate['upv'] = $this->upv;
+			$aUpdate['dnv'] = $this->dnv;
+			$aUpdate['pubed'] = $this->pubed;
+			$qrySave = $this->db->updateQuery("ccDecks", $aUpdate, "deckid");
+			$result = $qrySave;
+		}
+		else //this is a new deck save
+		{
+			$qrySave = $this->db->insertQuery(
+						"ccDecks",
+						"deckid, dcreatorid, title, coursecode, subject, desc, tstamp, upv, dnv, pubed",
+						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', '" . $this->desc . "', '" . $this->tstamp . "', '" . $this->upv . "', '" . $this->dnv . "', '" . $this->pubed . "'");
+			$result = $qrySave;
+		}
+		return $result;
+	}
+	
+	/************************************************************
+	*FUNCTION:    objectsIntoArray
+	*PURPOSE:     Helper method to convert XML to an array
+	************************************************************/
+	function objectsIntoArray($arrObjData, $arrSkipIndices = array())
+	{
+		$arrData = array();
+		
+		// if input is object, convert into array
+		if (is_object($arrObjData)) 
+		{
+			$arrObjData = get_object_vars($arrObjData);
+		}
+		
+		if (is_array($arrObjData)) 
+		{
+			foreach ($arrObjData as $index => $value) 
+			{
+				if (is_object($value) || is_array($value)) 
+				{
+					$value = objectsIntoArray($value, $arrSkipIndices); // recursive call
+				}
+				if (in_array($index, $arrSkipIndices)) 
+				{
+					continue;
+				}
+				$arrData[$index] = $value;
+			}
+		}
+		return $arrData;
+	}
     
 }
 ?>

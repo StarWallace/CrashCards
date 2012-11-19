@@ -6,9 +6,22 @@ class User {
 	public $uid, $email, $name, $alias, $campus;
 	private $db;
 	
-	function __construct()
+	function __construct($uid="")
 	{
 		$this->db = new SQLAccess();
+		
+		if ($uid != "")
+		{
+			$this->db = new SQLAccess();
+			//get full user data
+			$qryUser = $this->db->selectQuery(
+				"*",
+				"ccUsers",
+				"uid = '" . $uid . "'" );
+			$aInfo = $qryUser->fetch_assoc();
+			//insert all DB user data into the php object
+			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias'], $aInfo['campus']);
+		}
 	}
 	
 	/************************************************************
