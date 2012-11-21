@@ -11,7 +11,7 @@
 <div id="welcome">Welcome!</div>
 <div class="white h-spaced v-spaced separated shadow" id="message">As a member of CrashCards you will enjoy making and sharing flash cards that directly relate to your studies! Settling in is painless, so let's get started!</div>
 <div class="white h-spaced v-spaced separated" id="form" onsubmit="return validateForm()">
-    <form id="signup-form" action="puckoverglass.com" method="POST">
+    <form id="signup-form" action="create_account" method="POST">
         <div class="row">
             <div class="label"><label for="email">Email</label></div>
             <input id="email" autofocus maxlength="30" tabindex="1"/>

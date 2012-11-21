@@ -15,10 +15,7 @@
     // Results will be fetched from the database based on some default filtering and sort order
     // (e.g., some combination of new and highly-rated notes, possibly personalized for the user)
     // Future results will depend on the search and filter parameters
-    
-    $browser = new Browse();
-    $decks = $browser->getDecks();
-    
+        
 ?>
 
 <link rel="stylesheet" type="text/css" href="wrapper/css/browse.css"/>
@@ -65,17 +62,18 @@
 	<!-- THIS SHOULD BE PUT INTO A PHP CLASS -->
 
 	<?php
-		foreach ($decks as $deck) { 
+		//foreach ($decks as $deck) { 
+        for ($i = 0; $i < 10; $i++) {
 	?>
 	
 	<div class="browseItem">
         <div class="vote">
             <div class="scores">
                 <div class="up score">
-                    <?php echo $deck->up; ?>
+                    <?php echo "21"; ?>
                 </div>
                 <div class="down score">
-                    <?php echo $deck->down; ?>
+                    <?php echo "3"; ?>
                 </div>
             </div>
             <div class="voteControls">
@@ -85,28 +83,28 @@
         </div>
         <div class="deckTag">
             <a href="
-                <?php echo $deck->link; ?>
+                <?php echo "#link"; ?>
             ">
                 <div class="halfRow link">
                     <div class="title">
-                        <?php echo $deck->title; ?>
+                        <?php echo "Example Deck #0"; ?>
                     </div>
                 </div>
             </a>
             <div class="halfRow">
                 <div class="info">
                     <br/>
-                    <?php echo "$deck->subject - $deck->course - $deck->year"; ?>
+                    <?php echo "&lt;Subject&gt; - &lt;Course Code&gt; - &lt;Year&gt;"; ?>
                 </div>
             </div>
         </div>
         <div class="userTag">
             <a href="
-                <?php echo $deck->creator->link; ?>
+                <?php echo "#user0"; ?>
             ">
                 <div id="userName" class="halfRow link">
                     <div class="bold">
-                        <?php echo $deck->creator->name; ?>
+                        <?php echo "user0"; ?>
                     </div>
                 </div>
             </a>

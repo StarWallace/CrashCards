@@ -145,7 +145,7 @@ function updateScore() {
 
 // Set last and best scores
 function updateHistory() {
-    deck.lastScore = deck.numberCorrect / (deck.relativeIndex + 1);
+    deck.lastScore = deck.numberCorrect / (deck.relativeIndex);
     $("#bestScoreLabel, #lastScoreLabel").show();
     $("#lastScore").html($("#score").html());
     if (deck.lastScore > deck.bestScore) {

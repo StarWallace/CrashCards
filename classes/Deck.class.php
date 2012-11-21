@@ -1,24 +1,8 @@
 <?php
-<<<<<<< HEAD
 require_once("SQLAccess.class.php");
 
 class Deck 
 {
-=======
-    class Deck {
-        
-        public $creator;
-        public $title;
-        public $campus;
-        public $subject;
-        public $course;
-        public $term;
-        public $year;
-        public $up;
-        public $down;
-        public $tags;
-        public $link;
->>>>>>> Sign Up and New Browse
         
 	public $deckid, $creatorid, $title, $coursecode, $subject, $desc, $tstamp, $upv, $dnv, $pubed;
 	private $db;
