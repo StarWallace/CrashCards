@@ -15,11 +15,12 @@
                 $deck->creator->link = "#" . $deck->creator->name;
                 $deck->title = "Example Deck #$i";
                 $deck->campus = "University of Saskatchewan";
-                $deck->department = "CMPT";
-                $deck->course = "412";
+                $deck->subject = "Computer Science";
+                $deck->course = "CMPT 412";
                 $deck->term = "Fall";
                 $deck->year = 2012;
-                $deck->score = 250 - ($i * 23);
+                $deck->up = 300 - ($i * 23);
+                $deck->down = $i * 9;
                 $deck->tags = array("social communities", "reputation mechanisms", "recommender systems", "ongoing engagement problem");
                 $deck->link = "#$deck->title";
             }

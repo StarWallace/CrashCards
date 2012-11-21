@@ -1,0 +1,66 @@
+.row {
+    height: 40px;
+    line-height: 40px;
+}
+
+.row .label {
+    width: 100px;
+}
+
+.row input {
+    width: 280px;
+    height: 30px;
+    font-size: 12pt;
+    margin-right: 5px;
+}
+
+.row .note {
+    width: 520px;
+    margin-left: 5px;
+    line-height: 20px;
+}
+
+.signup {
+    width: 100px;
+    height: 30px;
+}
+
+input.button {
+    color: #ffffff !important;
+    outline: none !important;
+    line-height: 20px !important;
+}
+
+.hidden {
+    display: none;
+}
+
+#welcome {
+    text-align: center;
+    font-size: 150px;
+    font-weight: bold;
+    color: #333388;
+    
+    /*
+    text-shadow: 0px 0px 8px #000000;
+    color: #ffffff;    
+    */
+}
+
+#message {
+    text-align: center;
+    font-size: 16pt;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.error {
+    font-weight: bold;
+    color: red;
+}
+
+.valid {
+    font-style: italic;
+    font-weight: bold;
+    color: #00aa00;
+}

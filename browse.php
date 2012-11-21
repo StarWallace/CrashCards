@@ -21,30 +21,39 @@
     
 ?>
 
+<link rel="stylesheet" type="text/css" href="wrapper/css/browse.css"/>
 <link rel="stylesheet" type="text/css" href="wrapper/css/deck.css"/>
 
-<div class="white spaced" id="browseNav">
+<div id="pageTitle">
+    <h3>Browse</h3>
+</div>
+<div id="numberOfViews">
+    <h3>18 Available Views</h3>
+</div>
+<div class="floatLine"></div>
+
+<div class="white h-spaced" id="browseNav">
 	<div id="navFilters">
-		<select id="campus">
-			<option>Campus</option>
-		</select>
-		<select id="year">
-			<option>Year</option>
-		</select>
-		<select id="department">
-			<option>Department</option>
+		<select id="subject">
+			<option>Subject</option>
 		</select>
 		<select id="courseCode">
 			<option>Course Code</option>
 		</select>
+		<select id="year">
+			<option>Year</option>
+		</select>
 	</div>
-	<div id="navControls">
-		<input id="browseTop" type="button" value="TOP"/>
-		<input id="browseNew" type="button" value="NEW"/>
-	</div>
+    <div id="navControls">
+        <label for="sortOrder">Sort by:</label>
+        <select id="sortOrder">
+            <option>Top</option>
+            <option>New</option>
+        </select>
+    </div>
 </div>
 <br/>
-<div class="white spaced" id="deckList">
+<div id="deckList">
 
 
 
@@ -61,32 +70,33 @@
 	
 	<div class="browseItem">
         <div class="vote">
-            <div class="up control"></div>
-            <div class="score">
-                <?php echo $deck->score; ?>
+            <div class="scores">
+                <div class="up score">
+                    <?php echo $deck->up; ?>
+                </div>
+                <div class="down score">
+                    <?php echo $deck->down; ?>
+                </div>
             </div>
-            <div class="down control"></div>
+            <div class="voteControls">
+                <div class="up control"></div>
+                <div class="down control"></div>
+            </div>
         </div>
-        <div class="deckTagHolder">
-            <div class="deckTag">
-                <a href="
-                    <?php echo $deck->link; ?>
-                ">
-                    <div class="halfRow link">
-                        <div class="title">
-                            <?php echo $deck->title; ?>
-                        </div>
+        <div class="deckTag">
+            <a href="
+                <?php echo $deck->link; ?>
+            ">
+                <div class="halfRow link">
+                    <div class="title">
+                        <?php echo $deck->title; ?>
                     </div>
-                </a>
-                <div class="halfRow">
-                    <div class="info">
-                        <br/>
-                        <?php echo "$deck->department $deck->course - $deck->term $deck->year - $deck->campus"; ?>
-                    </div>
-                    <div class="tags">
-                        <br/>
-                        <?php echo implode(", ", $deck->tags); ?>
-                    </div>
+                </div>
+            </a>
+            <div class="halfRow">
+                <div class="info">
+                    <br/>
+                    <?php echo "$deck->subject - $deck->course - $deck->year"; ?>
                 </div>
             </div>
         </div>
@@ -95,19 +105,13 @@
                 <?php echo $deck->creator->link; ?>
             ">
                 <div id="userName" class="halfRow link">
-                    <div>
-                        <strong>
-                            <?php echo $deck->creator->name; ?>
-                        </strong>
+                    <div class="bold">
+                        <?php echo $deck->creator->name; ?>
                     </div>
                 </div>
             </a>
-            <div class="halfRow">
-                <div>
-                    <?php echo $deck->creator->rating; ?>
-                </div>
-            </div>
         </div>
+        <div class="clip"></div>
 	</div>
 	
 	<?php
@@ -116,6 +120,10 @@
   
 	<!----------- END ----------->
 
+</div>
+
+<div class="centred button separated" id="moreResults">
+    More Results
 </div>
 
 <?php
@@ -127,3 +135,5 @@
     
     require_once("wrapper/wrapper.php");
 ?>
+
+<script type="text/javascript" src="scripts/browse.js"></script>

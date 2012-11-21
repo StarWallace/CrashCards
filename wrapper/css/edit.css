@@ -7,14 +7,6 @@
     float: left;
 }
 
-.row {
-    clear: both;
-}
-
-.row > div {
-    float: left;
-}
-
 .deckInfo .label {
     width: 100px;
 }
@@ -54,7 +46,8 @@
 }
 
 .cardList .cardRow .minDisplay > div {
-    width: 50%;
+    width: 48%;
+    margin-left: 10px;
 }
 
 .cardList .cardRow .cardSummary {
@@ -122,21 +115,4 @@
 .cardControls {
     height: 30px;
     margin: 10px 0 10px 0;
-}
-
-.cardControls .control {
-    height: 100%;
-    width: 100px;
-    float: right;
-    margin-left: 20px;
-    background-color: #9999ff;
-    font-weight: bold;
-    text-align: center;
-    line-height: 30px;
-    font-size: 1em;
-    color: #ffffff;
-}
-
-.cardControls .control:hover {
-    background-color: #6b6bb3;
 }

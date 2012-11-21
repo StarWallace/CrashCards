@@ -3,22 +3,23 @@
     ****************/
 
 #deckList {
-    min-height: 100px;
-    /*border: 1px solid #dbdbdb;*/
-	padding-bottom: 15px;
-	padding-top: 1px;
+    background-color: #ffffff;
 }
 
 #deckList .browseItem {
     border: 1px solid #dbdbdb;
     min-height: 75px;
-    /*background-color: #e4e4e4;
-    /*margin: 5px;*/
-    margin-top: 15px;
+    clear: both;
+    margin-bottom: -1px;
 }
 
 #deckList .browseItem:hover {
-    box-shadow: 0 0 10px #888888;
+    box-shadow: 0 0 8px #444444;
+}
+
+#deckList .browseItem > div {
+    height: 75px;
+    float: left;
 }
 
     /***********
@@ -27,40 +28,45 @@
     
 .vote {
     width: 75px;
-    height: 75px;
     background-color: #bbbbbb;
     float: left;
 }
 
+.vote .voteControls {
+    display: none;
+}
+
 .vote .up,
 .vote .down {
-    height: 25px;
+    height: 75px;
+    width: 37px;
     background-repeat: no-repeat;
 }
 
 .vote .up {
+    float: left;
+}
+
+.vote .down {
+    float: right;
+}
+
+.voteControls .up {
     background-image: url("../images/controls/vote_up.png");
     background-position: center;
 }
 
-.vote .up:hover {
+.voteControls .up:hover {
     background-image: url("../images/controls/vote_up_hover.png");
 }
 
-.vote .down {
+.voteControls .down {
     background-image: url("../images/controls/vote_down.png");
     background-position: center;
 }
 
-.vote .down:hover {
+.voteControls .down:hover {
     background-image: url("../images/controls/vote_down_hover.png");
-}
-
-.vote .score {
-    font-size: 1em;
-    line-height: 25px;
-    height: 25px;
-    text-align: center;
 }
 
     /****************
@@ -68,16 +74,8 @@
     ****************/
 
 .deckTag {
-   /* background-color: #e4e4e4;*/
     color: #040404;
-    width: 100%;
-    position: absolute;
-}
-
-.deckTagHolder {
-    position: relative;
-    margin-left: 75px;
-    margin-right: 200px;
+    width: 600px;
 }
 
 .deckTag .title {
@@ -87,20 +85,10 @@
 
 .deckTag .info {
     float: left;
-    font-size: 0.6em;
+    font-size: 0.8em;
     line-height: 1em;
-    width: 45%;
     padding-left: 10px;
     
-}
-
-.deckTag .tags {
-    float: right;
-    font-size: 0.6em;
-    line-height: 1em;
-    margin-left: -21px;
-    padding-right: 10px;
-    width: 45%;
 }
 
     /***************
@@ -108,12 +96,24 @@
     ***************/
 
 .userTag {
-    float: right;
-    height: 75px;
     width: 200px;
-   /* background-color: #bbbbbb;*/
+    border-left: 1px solid #dbdbdb;
 }
 
+    /***************
+        CLIP TAG
+    ***************/
+
+.clip {
+    float: right !important;
+    width: 50px;
+    cursor: pointer;
+    background-image: url("../images/controls/clip.png");
+}
+
+.clip:hover {
+    background-image: url("../images/controls/clip_hover.png");
+}
 
     /********************
         COMMON STYLES

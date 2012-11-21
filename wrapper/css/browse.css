@@ -1,0 +1,27 @@
+#pageTitle {
+    float: left;
+}
+
+#numberOfViews {
+    float: right;
+}
+
+#moreResults {
+    width: 150px;
+    float: none;
+}
+
+#browseNav {
+    height: 2em;
+    line-height: 2em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#navFilters {
+    float: left;
+}
+
+#navControls {
+    float: right;
+}

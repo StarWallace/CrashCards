@@ -9,8 +9,8 @@
 <link rel="stylesheet" type="text/css" href="wrapper/css/edit.css"/>
 
 <div class="cardControls">
-    <div class="control" id="publishDeck">Publish</div>
-    <div class="control" id="saveDeck">Save</div>
+    <div class="button" id="publishDeck">Publish</div>
+    <div class="button" id="saveDeck">Save</div>
 </div>
 
 <div class="deckInfo white">
@@ -80,9 +80,9 @@
 </div>
 
 <div class="cardControls">
-    <div class="control" id="publishDeck">Publish</div>
-    <div class="control" id="saveDeck">Save</div>
-    <div class="control" id="newCard">New Card</div>
+    <div class="button" id="publishDeck">Publish</div>
+    <div class="button" id="saveDeck">Save</div>
+    <div class="button" id="newCard">New Card</div>
 </div>
 
 <?php
@@ -90,7 +90,7 @@
 	* When using the wrapper system this must be called at the top of every page.
 	* It basically just sets a custom title for the page and then pulls in the wrapper
 	*/
-    $sTitle = "View Deck";
+    $sTitle = "Edit Deck";
     
     require_once("wrapper/wrapper.php");
 ?>

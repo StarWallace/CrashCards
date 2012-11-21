@@ -8,20 +8,22 @@
 
 <link rel="stylesheet" type="text/css" href="wrapper/css/welcome.css"/>
     
-<div class="facebook spaced button" id="getStarted">
+<div class="facebook h-spaced button" id="getStarted">
     GET STARTED!
 </div>
 
-<div class="white spaced" id="whatIsThis">
+<div class="floatLine"></div>
+
+<div class="white h-spaced" id="whatIsThis">
     What is this??<br/>
     This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. 
 </div>
 
-<div class="white spaced welcomeCard" id="welcomeCard1">
+<div class="white h-spaced welcomeCard" id="welcomeCard1">
     Create and share flashcards with fellow students!
 </div>
 
-<div class="white spaced welcomeCard" id="welcomeCard2">
+<div class="white h-spaced welcomeCard" id="welcomeCard2">
     Crash course studying that's relevant to your classes!
 </div>
     

@@ -126,43 +126,37 @@ input.login {
     background-image: url("../images/controls/logout.png");
 }
 
-    /*************
-        BROWSE
-    *************/
-    
-#browseNav {
-    height: 2em;
-    line-height: 2em;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    /*border: 1px solid #dbdbdb;*/
-}
-
-#navFilters {
-    float: left;
-}
-
-#navControls {
-    float: right;
-}
-
     /*********************
         COMMON CLASSES
     *********************/
     
 .centred {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
-.spaced {
+.h-spaced {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.v-spaced {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.separated {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .white {
     background-color: #ffffff;
     color: #000044;
+}
+
+.shadow {
+    box-shadow: 0 0 10px #888888;
 }
 
 .white:hover {
@@ -185,15 +179,46 @@ input.login {
     font-weight: bold;
 }
 
+.row {
+    clear: both;
+}
+
+.row > div {
+    float: left;
+}
+
+.row > input {
+    float: left;
+}
+
 .button {
+    height: 100%;
+    width: 100px;
+    float: right;
+    margin-left: 20px;
+    background-color: #9999ff;
     font-weight: bold;
-    width: 80px;
-    height: 30px;
-    padding-bottom: 5px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1em;
     color: #ffffff;
-    background-color: #000000;
-    border: 1px solid #dbdbdb;
     cursor: pointer;
+    height: 30px;
+}
+
+.button:hover {
+    background-color: #6b6bb3;
+}
+
+.button:active {
+    background-color: #333388;
+}
+
+.button:focus {
+    border: groove 2px #333388;
+    height: 28px;
+    line-height: 28px;
+    width: 98px;
 }
 
 .ajaxLoader {
