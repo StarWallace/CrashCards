@@ -143,7 +143,7 @@ class User {
 				{
 					$qryReg = $this->db->insertQuery(
 						"ccUsers",
-						"uid, email, name, alias, campus, pass",
+						"uid, email, name, alias, pass",
 						"NULL, '" . $this->email . "', '" . $this->name . "', '" . $this->alias . "', '" . $pwHash . "'");
 					$result = $qryReg;	
 				}
