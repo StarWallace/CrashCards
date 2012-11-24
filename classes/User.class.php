@@ -3,7 +3,7 @@ require_once("SQLAccess.class.php");
 
 class User {
 	
-	public $uid, $email, $name, $alias, $campus;
+	public $uid, $email, $name, $alias;
 	private $db;
 	
 	function __construct($uid="")
@@ -20,7 +20,7 @@ class User {
 				"uid = '" . $uid . "'" );
 			$aInfo = $qryUser->fetch_assoc();
 			//insert all DB user data into the php object
-			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias'], $aInfo['campus']);
+			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias']);
 		}
 	}
 	
@@ -49,7 +49,7 @@ class User {
 	* Purpose: Call this function to insert the DB info into the user object
 	* takes in a dbObject
 	**/
-	function FillUser($uid, $email, $name="", $alias="", $campus="")
+	function FillUser($uid, $email, $name="", $alias="")
 	{
 		//all this does is strips off any special characters that might cause problems in
 		//SQL, php, or html
@@ -57,7 +57,6 @@ class User {
 		$this->email = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($email)));		
 		$this->name = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($name)));
 		$this->alias = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($alias)));
-		$this->campus = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($campus)));
 	}
 	
 	/************************************************************
@@ -124,7 +123,7 @@ class User {
 	* Purpose: If this user is a new user, call this function to add them to the database
 	* takes in a dbObject
 	**/
-	function Register($email, $pass, $passconf, $name="", $alias="", $campus="")
+	function Register($email, $pass, $passconf, $name="", $alias="")
 	{
 		//place the passed in info in the user object
 		$this->FillUser("dummy id", $email, $name, $alias, $campus);
@@ -145,7 +144,7 @@ class User {
 					$qryReg = $this->db->insertQuery(
 						"ccUsers",
 						"uid, email, name, alias, campus, pass",
-						"NULL, '" . $this->email . "', '" . $this->name . "', '" . $this->alias . "', '" . $this->campus . "', '" . $pwHash . "'");
+						"NULL, '" . $this->email . "', '" . $this->name . "', '" . $this->alias . "', '" . $pwHash . "'");
 					$result = $qryReg;	
 				}
 				else
@@ -222,7 +221,7 @@ class User {
 				"email = '" . $this->email . "'" );
 			$aInfo = $qryUser->fetch_assoc();
 			//insert all DB user data into the php object
-			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias'], $aInfo['campus']);
+			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias']);
 			//place a copy of the object as a cookie to track the logged in user
 			setcookie("user", serialize($this), time()+3600*24*365);
 			$result = true;
