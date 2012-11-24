@@ -9,14 +9,14 @@
         // create new user and redirect to manage.php
         $User = new User();
         $registerResult = $User->Register($_POST['email'], $_POST['password'], $_POST['confirm'], $_POST['name'], $_POST['alias']);
-        if ($registerResult = 1) {
+        if ($registerResult == 1) {
             $loginResult = $User->Login($_POST['email'], $_POST['password']);
             if ($loginResult != true) {
                 // Login failure
                 $error = $loginResult;
             } else {
                 // Registration and login success
-                //header('Location: manage.php');
+                header('Location: manage.php');
             }
         } else {
             // Registration failure
@@ -39,9 +39,18 @@
 <div class="white h-spaced v-spaced separated shadow" id="message">As a member of CrashCards you will enjoy making and sharing flash cards that directly relate to your studies! Settling in is painless, so let's get started!</div>
 <div class="white h-spaced v-spaced separated" id="form" onsubmit="return validateForm()">
     <form id="signup-form" action="signup.php" method="POST">
+        <div>
+            <?php
+                echo isset($error) ? $error : "";
+            ?>
+        </div>
         <div class="row">
             <div class="label"><label for="email">Email</label></div>
-            <input name="email" id="email" autofocus maxlength="30" tabindex="1"/>
+            <input name="email" id="email" autofocus maxlength="30" tabindex="1"
+                    <?php
+                        echo isset($_POST) && isset($_POST['email']) ? "value=\"" . $_POST['email'] . "\"" : "";
+                    ?>
+            />
             <div class="note" id="emailNote">First, we need your email.</div>
         </div>
         <div class="row hidden">
@@ -56,25 +65,26 @@
         </div>
         <div class="row hidden">
             <div class="label"><label for="name">Name</label></div>
-            <input name="name" id="name" maxlength="30" tabindex="4"/>
+            <input name="name" id="name" maxlength="30" tabindex="4"
+                    <?php
+                        echo isset($_POST) && isset($_POST['name']) ? "value=\"" . $_POST['name'] . "\"" : "";
+                    ?>
+            />
             <div class="note" id="nameNote"></div>
         </div>
         <div class="row hidden">
             <div class="label"><label for="alias">Alias</label></div>
-            <input name="alias" id="alias" maxlength="30" tabindex="5"/>
+            <input name="alias" id="alias" maxlength="30" tabindex="5"
+                    <?php
+                        echo isset($_POST) && isset($_POST['alias']) ? "value=\"" . $_POST['alias'] . "\"" : "";
+                    ?>
+            />
             <div class="note" id="aliasNote"></div>
         </div>
         <div class="centred signup" tabindex="6">
             <input type="submit" class="button" id="signup" value="Sign Up" tabindex="7"/>
             <input type="button" class="button" id="next" value="Next" tabindex="7"/>
         </div>
-        <?php
-            if(isset($error)) echo "Error: $error";
-            echo "<br/>";
-            echo "Register: $registerResult";
-            echo "<br/>";
-            echo "Login: $loginResult";
-        ?>
     </form>
 </div>
 

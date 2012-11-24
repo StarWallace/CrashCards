@@ -82,7 +82,7 @@ class User {
 		if ($pass != "") //if the password is not blank
 		{
 			//use to check for valid password credentials
-			if (preg_match("/^(?=.*\d+)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%]{8,30}/", $this->name) == 0)
+			if (preg_match("/^(?=.*\d+)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%]{8,30}/", $pass) == 0)
 			{
 				$result .= "<p class='err'>Invalid password was entered. Please use at least 1 letter, at least 1 number, and a minimum of 8 characters.</p>";
 			}

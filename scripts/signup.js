@@ -76,39 +76,39 @@ function nameChange() {
 function aliasChange() {
     if ($("#alias").val() != "") {
         if (isUniqueAlias($("#alias").val())) {
-            $("#aliasNote").removeClass("error").addClass("valid").html(messages.valid.alias);
+            $("#aliasNote").removeClass("err").addClass("valid").html(messages.valid.alias);
         } else {
-            $("#aliasNote").removeClass("valid").addClass("error").html(messages.duplicate.alias);
+            $("#aliasNote").removeClass("valid").addClass("err").html(messages.duplicate.alias);
         }
     } else {
-        $("#aliasNote").removeClass("error").removeClass("valid").html(messages.def.alias);
+        $("#aliasNote").removeClass("err").removeClass("valid").html(messages.def.alias);
     }
 }
 
 function emailChange() {
     if (isValidEmail($("#email").val())) {
         if (isUniqueEmail($("#email").val())) {
-            $("#emailNote").removeClass("error").addClass("valid").html(messages.valid.email);
+            $("#emailNote").removeClass("err").addClass("valid").html(messages.valid.email);
             $("#password").parent().show();
             $("#password").focus();
         } else {
-            $("#emailNote").removeClass("valid").addClass("error").html(messages.duplicate.email);
+            $("#emailNote").removeClass("valid").addClass("err").html(messages.duplicate.email);
         }
     } else {
-        $("#emailNote").removeClass("valid").addClass("error").html(messages.error.email);
+        $("#emailNote").removeClass("valid").addClass("err").html(messages.error.email);
     }
-    if ($("#emailNote").hasClass("error") && $("#confirmNote").hasClass("valid")) {
+    if ($("#emailNote").hasClass("err") && $("#confirmNote").hasClass("valid")) {
         $("#confirmNote").html(messages.valid.confirmPending);
     }
 }
 
 function passwordChange() {
     if (isValidPassword($("#password").val())) {
-        $("#passwordNote").removeClass("error").addClass("valid").html(messages.valid.password);
+        $("#passwordNote").removeClass("err").addClass("valid").html(messages.valid.password);
         $("#confirm").parent().show();
         $("#confirm").focus();
     } else {
-        $("#passwordNote").removeClass("valid").addClass("error").html(messages.error.password);
+        $("#passwordNote").removeClass("valid").addClass("err").html(messages.error.password);
     }
     if ($("#confirm").val() != "") {
         confirmChange();
@@ -119,19 +119,19 @@ function confirmChange() {
     if (isValidConfirm($("#confirm").val())) {
         if (isValidPassword($("#password").val())) {
             if ($("#emailNote").hasClass("valid")) {
-                $("#confirmNote").removeClass("error").addClass("valid").html(messages.valid.confirm);
+                $("#confirmNote").removeClass("err").addClass("valid").html(messages.valid.confirm);
                 $("#passwordNote").hide();
                 $("#name").parent().show();
                 $("#alias").parent().show();
                 $("#name").focus();
             } else {
-                $("#confirmNote").removeClass("error").addClass("valid").html(messages.valid.confirmPending);
+                $("#confirmNote").removeClass("err").addClass("valid").html(messages.valid.confirmPending);
             }
         } else {
             $("#confirmNote").html("");
         }
     } else {
-        $("#confirmNote").removeClass("valid").addClass("error").html(messages.error.confirm);
+        $("#confirmNote").removeClass("valid").addClass("err").html(messages.error.confirm);
         $("#passwordNote").show();
     }
 }
@@ -194,7 +194,7 @@ function validateForm() {
         return false;
     } else {
         if ($("#password").val() == "" && $("#name").parent().css("display") != "none") {
-            $("#passwordNote").removeClass("valid").addClass("error").html(messages.error.password);
+            $("#passwordNote").removeClass("valid").addClass("err").html(messages.error.password);
             return false;
         }
         return true;
