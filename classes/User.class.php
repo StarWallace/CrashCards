@@ -122,7 +122,7 @@ class User {
 	function Register($email, $pass, $passconf, $name="", $alias="")
 	{
 		//place the passed in info in the user object
-		$this->FillUser("dummy id", $email, $name, $alias, $campus);
+		$this->FillUser("dummy id", $email, $name, $alias);
 		//check to see if email already in use
 		if ($this->CheckDupUser() === false) 
 		{

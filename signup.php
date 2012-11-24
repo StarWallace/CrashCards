@@ -8,18 +8,20 @@
     } else {
         // create new user and redirect to manage.php
         $User = new User();
-        if ($error = $User->Register($_POST['email'], $_POST['password'], $_POST['confirm'], $_POST['name'], $_POST['alias'], $_POST['campus'])) {
-            if ($error = $User->Login($_POST['email'], $_POST['password'])) {
+        $registerResult = $User->Register($_POST['email'], $_POST['password'], $_POST['confirm'], $_POST['name'], $_POST['alias']);
+        if ($registerResult = 1) {
+            $loginResult = $User->Login($_POST['email'], $_POST['password']);
+            if ($loginResult != true) {
                 // Login failure
+                $error = $loginResult;
             } else {
                 // Registration and login success
-                header('Location: manage.php');
+                //header('Location: manage.php');
             }
         } else {
             // Registration failure
-            
+            $error = $registerResult;
         }
-        
     }
 ?>
 
@@ -66,6 +68,13 @@
             <input type="submit" class="button" id="signup" value="Sign Up" tabindex="7"/>
             <input type="button" class="button" id="next" value="Next" tabindex="7"/>
         </div>
+        <?php
+            if(isset($error)) echo "Error: $error";
+            echo "<br/>";
+            echo "Register: $registerResult";
+            echo "<br/>";
+            echo "Login: $loginResult";
+        ?>
     </form>
 </div>
 
