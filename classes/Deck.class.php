@@ -38,7 +38,7 @@ class Deck
 	*FUNCTION:    FillDeck
 	*PURPOSE:     Fills the deck object with the passed in data strips all special chars and tags for safety
 	************************************************************/
-    function FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $tstamp, $upv, $dnv, $cardcount, $pubed)
+    function FillDeck($deckid, $creatorid, $title="", $coursecode="", $subject="", $tstamp="", $upv="", $dnv="", $cardcount="", $pubed="")
     {
 		//all this does is strips off any special characters that might cause problems in
 		//SQL, php, or html
@@ -147,7 +147,7 @@ class Deck
 			$qrySave = $this->db->insertQuery(
 						"ccDecks",
 						"deckid, dcreatorid, title, coursecode, subject, desc, tstamp, upv, dnv, cardcount, pubed",
-						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', '" . $this->tstamp . "', '" . $this->upv . "', '" . $this->dnv . "', '" . $this->cardcount . "', '" . $this->pubed . "'");
+						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', CURDATE(), '" . $this->upv . "', '" . $this->dnv . "', '" . $this->cardcount . "', '" . $this->pubed . "'");
 			$result = $qrySave;
 		}
 		return $result;
