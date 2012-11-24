@@ -4,10 +4,10 @@ require_once("SQLAccess.class.php");
 class Deck 
 {
         
-	public $deckid, $creatorid, $title, $coursecode, $subject, $desc, $tstamp, $upv, $dnv, $pubed;
+	public $deckid, $creatorid, $title, $coursecode, $subject, $tstamp, $upv, $dnv, $cardcount, $pubed;
 	private $db;
 
-	function __construct($deckid="", $creatorid="", $title="", $coursecode="", $subject="", $desc="", $tstamp="", $upv="", $dnv="", $pubed="")
+	function __construct($deckid="", $creatorid="", $title="", $coursecode="", $subject="", $tstamp="", $upv="", $dnv="", $cardcount="" $pubed="")
 	{
 		//all cases need this
 		$this->db = new SQLAccess();
@@ -18,7 +18,7 @@ class Deck
 			if ($creatorid != "")
 			{
 				//fill deck object with all data
-				$this->FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $desc, $tstamp, $upv, $dnv, $pubed);
+				$this->FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $tstamp, $upv, $dnv, $pubed);
 			}
 			else //else only the deckid is passed, get the full object from the DB
 			{
@@ -29,7 +29,7 @@ class Deck
 					"deckid = '" . $deckid . "'" );
 				$aInfo = $qryDeck->fetch_assoc();
 				//insert all DB user data into the php object
-				$this->FillDeck($aInfo['deckid'], $aInfo['creatorid'], $aInfo['title'], $aInfo['coursecode'], $aInfo['subject'], $aInfo['desc'], $aInfo['tstamp'], $aInfo['upv'], $aInfo['dnv'], $aInfo['pubed']);
+				$this->FillDeck($aInfo['deckid'], $aInfo['creatorid'], $aInfo['title'], $aInfo['coursecode'], $aInfo['subject'], $aInfo['tstamp'], $aInfo['upv'], $aInfo['dnv'], $aInfo['cardcount'], $aInfo['pubed']);
 			}
 		}
 	}
@@ -38,7 +38,7 @@ class Deck
 	*FUNCTION:    FillDeck
 	*PURPOSE:     Fills the deck object with the passed in data strips all special chars and tags for safety
 	************************************************************/
-    function FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $desc, $tstamp, $upv, $dnv, $pubed)
+    function FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $tstamp, $upv, $dnv, $cardcount, $pubed)
     {
 		//all this does is strips off any special characters that might cause problems in
 		//SQL, php, or html
@@ -47,10 +47,10 @@ class Deck
 		$this->title = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($title)));
 		$this->coursecode = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($coursecode)));
 		$this->subject = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($subject)));
-		$this->desc = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($desc)));
 		$this->tstamp = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($tstamp)));	
 		$this->upv = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($upv)));
 		$this->dnv = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($dnv)));	
+		$this->cardcount = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($cardcount)));	
 		$this->pubed = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($pubed)));
     }
 	
@@ -123,21 +123,31 @@ class Deck
 			$aUpdate['creatorid'] = $this->creatorid;
 			$aUpdate['title'] = $this->title;
 			$aUpdate['coursecode'] = $this->coursecode;
-			$aUpdate['subject'] = $this->prof;
-			$aUpdate['desc'] = $this->campus;
+			$aUpdate['subject'] = $this->subject;
 			$aUpdate['tstamp'] = $this->tstamp;
 			$aUpdate['upv'] = $this->upv;
 			$aUpdate['dnv'] = $this->dnv;
+			$aUpdate['cardcount'] = $this->cardcount;
 			$aUpdate['pubed'] = $this->pubed;
 			$qrySave = $this->db->updateQuery("ccDecks", $aUpdate, "deckid");
 			$result = $qrySave;
 		}
 		else //this is a new deck save
 		{
+			$qrySubject = $this->db->selectQuery("subject", "ccSubjects", "subject = '" . $this->subject . "'");
+			if ($qrySubject->num_rows < 1) //if the subject does not exist
+			{
+				$qrySubject = $this->db->insertQuery("ccSubjects", "subject", "'" . $this->subject . "'");
+			}
+			$qryCourse = $this->db->selectQuery("coursecode", "ccCourses", "coursecode = '" . $this->coursecode . "'");
+			if ($qryCourse->num_rows < 1) //if the coursecode does not exist
+			{
+				$qryCourse = $this->db->insertQuery("ccCourses", "coursecode, subject", "'" . $this->coursecode . "', " . $this->subject . "'");
+			}
 			$qrySave = $this->db->insertQuery(
 						"ccDecks",
-						"deckid, dcreatorid, title, coursecode, subject, desc, tstamp, upv, dnv, pubed",
-						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', '" . $this->desc . "', '" . $this->tstamp . "', '" . $this->upv . "', '" . $this->dnv . "', '" . $this->pubed . "'");
+						"deckid, dcreatorid, title, coursecode, subject, desc, tstamp, upv, dnv, cardcount, pubed",
+						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', '" . $this->tstamp . "', '" . $this->upv . "', '" . $this->dnv . "', '" . $this->cardcount . "', '" . $this->pubed . "'");
 			$result = $qrySave;
 		}
 		return $result;

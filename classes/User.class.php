@@ -74,7 +74,7 @@ class User {
 		{
 			$result .= "<p class='err'>Invalid email was entered. Can only contain letters, numbers, dots, underscores, and dashes. Use the form john_doe@example.com.</p>";
 		}
-		if (preg_match("/^[A-Za-z \-']+$/", $this->name) == 0)
+		if (preg_match("/^[A-Za-z \-']?$/", $this->name) == 0)
 		{
 			$result .= "<p class='err'>Invalid name was entered. Can only contain letters, dashes, spaces, and apostrophes.</p>";
 		}
@@ -82,15 +82,11 @@ class User {
 		if ($pass != "") //if the password is not blank
 		{
 			//use to check for valid password credentials
-			if (preg_match("/^[A-Za-z \-']+$/", $this->name) == 0)
+			if (preg_match("/^(?=.*\d+)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%]{8,30}/", $this->name) == 0)
 			{
-				$result .= "<p class='err'>Invalid name was entered. Can only contain letters, dashes, spaces, and apostrophes.</p>";
+				$result .= "<p class='err'>Invalid password was entered. Please use at least 1 letter, at least 1 number, and a minimum of 8 characters.</p>";
 			}
 		}
-		// if (preg_match("/^((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}$/", $this->phone) == 0)
-		// {
-			// $result .= "<p class='err'>Invalid phone number was entered. Use the form (123) 456-7890 or 123-4567.</p>";
-		// }
 		if ($result === "")
 		{
 			$result = false;
