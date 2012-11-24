@@ -12,6 +12,10 @@ events.remove = function(event) {
             renumberList();
             if ($(".cardRow").size() > 1) {
                 enableRemove = true;
+                $(".cardRow").mousemove( function() {
+                    $(this).find(".remove").show();
+                    $(".cardRow").unbind("mousemove");
+                });
             }
         });
     }

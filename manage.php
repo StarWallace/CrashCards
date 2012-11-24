@@ -31,6 +31,9 @@
             <select id="sortOrder">
                 <option>Top</option>
                 <option>New</option>
+                <option>Subject</option>
+                <option>Course Code</option>
+                <option>Year</option>
             </select>
         </div>
         <a href="edit.php">
@@ -89,10 +92,17 @@
             <div id="cardCount" class="bottom">
                 14 cards
             </div>
+            <?php
+                // If deck not published
+                if (!$i) {
+            ?>
             <div class="deck-links">
                 <div class="button">Edit</div>
                 <div class="button">Publish</div>
             </div>
+            <?php
+                }
+            ?>
         </div>
         <div class="remove removeCard" title="Delete Deck"></div>
 	</div>
@@ -120,6 +130,9 @@
             <select id="sortOrder">
                 <option>Top</option>
                 <option>New</option>
+                <option>Subject</option>
+                <option>Course Code</option>
+                <option>Year</option>
             </select>
         </div>
     </div>
@@ -173,6 +186,9 @@
                     </div>
                 </div>
             </a>
+            <div id="cardCount" class="bottom">
+                14 cards
+            </div>
         </div>
         <div class="remove removeCard" title="Unclip Deck"></div>
 	</div>

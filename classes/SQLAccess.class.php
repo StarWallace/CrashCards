@@ -17,7 +17,7 @@
          *          sPassword - password associated with the user
          *          sDatabase - name of the database to use
          ************************************************************/
-        function __construct($sServer="<enter MySQL Server>", $sUser="<enter MySQL user to connect with>", $sPassword="<MySQL Password>", $sDatabase="<Name of the database>")
+        function __construct($sServer="localhost", $sUser="root", $sPassword="aaaa", $sDatabase="CrashCards")
         {
             //Connect to the MySQL server and open the database
             @$this->dbConnect = new mysqli($sServer, $sUser, $sPassword, $sDatabase);

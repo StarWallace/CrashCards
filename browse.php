@@ -46,6 +46,9 @@
         <select id="sortOrder">
             <option>Top</option>
             <option>New</option>
+            <option>Subject</option>
+            <option>Course Code</option>
+            <option>Year</option>
         </select>
     </div>
 </div>
@@ -86,7 +89,7 @@
                 <?php echo "#link"; ?>
             ">
                 <div class="halfRow link">
-                    <div class="title">
+                    <div class="title corner-spaced">
                         <?php echo "Example Deck #0"; ?>
                     </div>
                 </div>

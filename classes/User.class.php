@@ -242,7 +242,7 @@ class User {
 	
 	function FreshCookie()
 	{
-		if (isset($_COOKIE['user'])
+		if (isset($_COOKIE['user']))
 		{
 			setcookie("user", serialize($this), time()+3600*24*365);
 			$_COOKIE['user'] = serialize($this);
