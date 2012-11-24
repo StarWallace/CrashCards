@@ -1,5 +1,5 @@
 <?php
-require_once("SQLAccess.class.php");
+require_once("../classes/SQLAccess.class.php");
 
 $db = new SQLAccess();
 $result = null;
