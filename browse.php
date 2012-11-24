@@ -102,7 +102,7 @@
             <a href="
                 <?php echo "#user0"; ?>
             ">
-                <div id="userName" class="halfRow link">
+                <div id="userName" class="halfRow link corner-spaced">
                     <div class="bold">
                         <?php echo "user0"; ?>
                     </div>

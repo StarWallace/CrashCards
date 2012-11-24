@@ -98,6 +98,7 @@
 .userTag {
     width: 200px;
     border-left: 1px solid #dbdbdb;
+    position: relative;
 }
 
     /***************
@@ -113,15 +114,4 @@
 
 .clip:hover {
     background-image: url("../images/controls/clip_hover.png");
-}
-
-    /********************
-        COMMON STYLES
-    ********************/
-
-.deckTag .title,
-.userTag div > div {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
 }

@@ -125,6 +125,20 @@ input.login {
 .control#logout {
     background-image: url("../images/controls/logout.png");
 }
+    
+.remove {
+    position: absolute;
+    right: 10px;
+    height: 20px;
+    width: 20px;
+    background-image: url("../images/controls/remove.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.remove:hover {
+    background-image: url("../images/controls/remove_hover.png");
+}
 
     /*********************
         COMMON CLASSES
@@ -248,4 +262,26 @@ div.info-tooltip {
     font-style: italic;
     max-width: 300px;
 	z-index: 100;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.title {
+    font-size: 16pt;
+}
+
+.corner-spaced {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.bottom {
+    bottom: 0px;
 }

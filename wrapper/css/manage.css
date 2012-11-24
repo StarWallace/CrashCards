@@ -1,0 +1,50 @@
+.draftTag {
+    width: 20px;
+    height: 75px;
+    background-image: url("../images/draft.png");
+    float: left;
+}
+
+.userTag {
+    width: 243px;
+}
+
+.remove {
+    margin-top: 10px;
+    height: 20px !important;
+}
+
+.deck-links {
+    height: 75px;
+    width: 100px;
+    float: right;
+    text-align: right;
+    padding-top: 10px;
+}
+
+.deck-links .button {
+    height: 25px;
+    font-size: 0.8em;
+    line-height: 25px;
+    margin-bottom: 5px;
+}
+
+.userTag .bottom {
+    position: absolute;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    font-size: 0.8em;
+}
+
+.dismiss {
+    text-align: right;
+}
+
+.close {
+    margin-left: 10px;
+    top: 0px;
+}
+
+#tutorial {
+    position: relative;
+}
