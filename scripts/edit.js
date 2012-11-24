@@ -1,7 +1,7 @@
 var enableRemove = true;
 var events = new Object();
 
-events.removeCard = function(event) {
+events.remove = function(event) {
     event.stopPropagation();
     if (enableRemove) {
         enableRemove = false;
@@ -27,12 +27,12 @@ events.selectCard = function() {
 events.enterCard = function() {
     if (enableRemove) {
         
-        $(this).find(".removeCard").show();
+        $(this).find(".remove").show();
     }
 }
 
 events.leaveCard = function() {
-    $(this).find(".removeCard").hide();
+    $(this).find(".remove").hide();
 }
 
 $.fn.makeActive = function() {
@@ -57,7 +57,7 @@ $.fn.cardCreate = function() {
     $(this).appendTo($(".cardList").first()).hide();
     $(this).hover(events.enterCard, events.leaveCard);
     $(this).click(events.selectCard);
-    $(this).find(".removeCard").click(events.removeCard);
+    $(this).find(".remove").click(events.remove);
     return $(this);
 }
 
@@ -82,7 +82,7 @@ $(function() {
     // If there are less than 2 cards, don't allow user to remove remaining card
     if ($("#sortable").children().size() < 2) {
         enableRemove = false;
-        $(".removeCard").hide();
+        $(".remove").hide();
     }
     
     // Make the first card active
@@ -91,7 +91,7 @@ $(function() {
 
 $(".cardRow").hover(events.enterCard, events.leaveCard);
 $(".cardRow").click(events.selectCard);
-$(".removeCard").click(events.removeCard);
+$(".remove").click(events.remove);
 
 $("#newCard").click( function() {
     addNewCard();
@@ -133,7 +133,7 @@ function addNewCard() {
                     '<div class="cardSummary"></div>' +
                 '</div>' +
             '</div>' +
-            '<div class="removeCard"></div>' +
+            '<div class="remove"></div>' +
         '</div>'
     ).cardCreate().slideDown( function() {
         makeAllInactive();

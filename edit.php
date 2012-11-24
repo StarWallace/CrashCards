@@ -74,7 +74,7 @@
                 <div class="cardSummary"></div>
             </div>
         </div>
-        <div class="removeCard"></div>
+        <div class="remove"></div>
     </div>
     
 </div>
