@@ -69,28 +69,20 @@
 
 .viewDeck .controlBar #checkMark {
     display: none;
-    background-image: url("../images/controls/check_empty.png");
+    background-image: url("../images/controls/check_green.png");
 }
 
 .viewDeck .controlBar #checkMark:hover {
     background-image: url("../images/controls/check_hover.png");
 }
 
-.viewDeck .controlBar #checkMark.selected {
-    background-image: url("../images/controls/check_green.png");
-}
-
 .viewDeck .controlBar #xMark {
     display: none;
-    background-image: url("../images/controls/x_empty.png");
+    background-image: url("../images/controls/x_red.png");
 }
 
 .viewDeck .controlBar #xMark:hover {
     background-image: url("../images/controls/x_hover.png");
-}
-
-.viewDeck .controlBar #xMark.selected {
-    background-image: url("../images/controls/x_red.png");
 }
 
 .viewDeck .controlBar #flip {

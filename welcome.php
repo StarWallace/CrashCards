@@ -17,11 +17,11 @@
     This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. 
 </div>
 
-<div class="h-spaced welcomeCard" id="welcomeCard1">
+<div class="h-spaced welcomeCard hand-font" id="welcomeCard1">
     Create and share flashcards with fellow students!
 </div>
 
-<div class="h-spaced welcomeCard" id="welcomeCard2">
+<div class="h-spaced welcomeCard hand-font" id="welcomeCard2">
     Crash course studying that's relevant to your classes!
 </div>
     

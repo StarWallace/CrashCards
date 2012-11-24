@@ -18,7 +18,7 @@
     </div>
     <div id="cardHolder">
         <div class="white card">
-            <div class="text">
+            <div class="text hand-font">
                 <div class="question"></div>
                 <div class="answer"></div>
             </div>
