@@ -1,3 +1,28 @@
+<?php
+    function __autoload($sClassName) {
+        require_once("classes/$sClassName.class.php");
+    }
+
+    if (!isset($_POST) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['confirm'])) {
+        // stay on this page
+    } else {
+        // create new user and redirect to manage.php
+        $User = new User();
+        if ($error = $User->Register($_POST['email'], $_POST['password'], $_POST['confirm'], $_POST['name'], $_POST['alias'], $_POST['campus'])) {
+            if ($error = $User->Login($_POST['email'], $_POST['password'])) {
+                // Login failure
+            } else {
+                // Registration and login success
+                header('Location: manage.php');
+            }
+        } else {
+            // Registration failure
+            
+        }
+        
+    }
+?>
+
 <?php 
 	/*
 	* When using the wrapper system this must be called at the top of every page.
@@ -11,34 +36,35 @@
 <div id="welcome">Welcome!</div>
 <div class="white h-spaced v-spaced separated shadow" id="message">As a member of CrashCards you will enjoy making and sharing flash cards that directly relate to your studies! Settling in is painless, so let's get started!</div>
 <div class="white h-spaced v-spaced separated" id="form" onsubmit="return validateForm()">
-    <form id="signup-form" action="create_account" method="POST">
+    <form id="signup-form" action="signup.php" method="POST">
         <div class="row">
             <div class="label"><label for="email">Email</label></div>
-            <input id="email" autofocus maxlength="30" tabindex="1"/>
+            <input name="email" id="email" autofocus maxlength="30" tabindex="1"/>
             <div class="note" id="emailNote">First, we need your email.</div>
         </div>
         <div class="row hidden">
             <div class="label"><label for="password">Password</label></div>
-            <input type="password" id="password" maxlength="30" tabindex="2"/>
+            <input name="password" type="password" id="password" maxlength="30" tabindex="2"/>
             <div class="note" id="passwordNote">Next we need a password.</div>
         </div>
         <div class="row hidden">
             <div class="label"><label for="confirm">Confirm</label></div>
-            <input type="password" id="confirm" tabindex="3"/>
+            <input name="confirm" type="password" id="confirm" tabindex="3"/>
             <div class="note" id="confirmNote">Now just confirm your password...</div>
         </div>
         <div class="row hidden">
             <div class="label"><label for="name">Name</label></div>
-            <input id="name" maxlength="30" tabindex="4"/>
+            <input name="name" id="name" maxlength="30" tabindex="4"/>
             <div class="note" id="nameNote"></div>
         </div>
         <div class="row hidden">
             <div class="label"><label for="alias">Alias</label></div>
-            <input id="alias" maxlength="30" tabindex="5"/>
+            <input name="alias" id="alias" maxlength="30" tabindex="5"/>
             <div class="note" id="aliasNote"></div>
         </div>
         <div class="centred signup" tabindex="6">
-            <input type="submit" class="button" id="signup" value="Sign Up" tabindex="7" disabled="disabled"/>
+            <input type="submit" class="button" id="signup" value="Sign Up" tabindex="7"/>
+            <input type="button" class="button" id="next" value="Next" tabindex="7"/>
         </div>
     </form>
 </div>

@@ -3,12 +3,12 @@
 }
 
 .deckInfo input {
-    width: 360px;
+    width: 350px;
     float: left;
 }
 
 .deckInfo .label {
-    width: 100px;
+    width: 120px;
 }
 
 .deckInfo .column {
@@ -28,7 +28,7 @@
 
 .cardList .cardRow {
     padding: 10px 0 10px 0;
-    height: 80px;
+    height: 85px;
 }
 
 .cardList .cardRow div {
@@ -52,9 +52,9 @@
 
 .cardList .cardRow .cardSummary {
     padding-right: 20px;
-    height: 60px;
+    height: 70px;
     overflow: hidden;
-    font-size: 7pt;
+    font-size: 10pt;
 }
 
 .cardList .cardRow.selected .cardSummary {
@@ -68,18 +68,18 @@
 }
 
 .cardList .cardRow {
-    border-top: 1px dashed #000000;
-    background-color: #dbdbdb;
+    border-top: 1px solid #dbdbdb;
+    background-color: #eeeeee;
     cursor: pointer;
 }
 
 .cardList .cardRow:hover {
-    background-color: #eeeeee;
+    background-color: #ffffff;
     color: #000000;
 }
 
 .placeholder {
-    border-top: 1px dashed #000000;
+    border-top: 1px solid #dbdbdb;
     background-color: #ffff99;
     height: 100px;
 }
@@ -92,7 +92,7 @@
 
 .cardRow textarea {
     resize: none;
-    height: 99%;
+    height: 244px;
     width: 100%;
     border: 1px solid #888888;
     font-family: helvetica, sans-serif;

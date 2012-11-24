@@ -146,9 +146,11 @@ function canSubmit() {
 
 $("input").change( function() {
     if (canSubmit()) {
-        $("#signup").removeAttr("disabled");
+        $("#next").hide();
+        $("#signup").show();
     } else {
-        $("#signup").attr("disabled", "disabled");
+        $("#signup").hide();
+        $("#next").show();
     }
 });
 

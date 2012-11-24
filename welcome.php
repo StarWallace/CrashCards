@@ -8,9 +8,7 @@
 
 <link rel="stylesheet" type="text/css" href="wrapper/css/welcome.css"/>
     
-<div class="facebook h-spaced button" id="getStarted">
-    GET STARTED!
-</div>
+<a href="signup.php"><div class="facebook h-spaced button" id="getStarted">GET STARTED!</div></a>
 
 <div class="floatLine"></div>
 
@@ -19,11 +17,11 @@
     This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. 
 </div>
 
-<div class="white h-spaced welcomeCard" id="welcomeCard1">
+<div class="h-spaced welcomeCard" id="welcomeCard1">
     Create and share flashcards with fellow students!
 </div>
 
-<div class="white h-spaced welcomeCard" id="welcomeCard2">
+<div class="h-spaced welcomeCard" id="welcomeCard2">
     Crash course studying that's relevant to your classes!
 </div>
     

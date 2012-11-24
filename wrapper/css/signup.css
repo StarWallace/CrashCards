@@ -54,9 +54,12 @@ input.button {
     padding-right: 100px;
 }
 
+#signup {
+    display: none;
+}
+
 .error {
-    font-weight: bold;
-    color: red;
+    color: #333388;
 }
 
 .valid {

@@ -45,17 +45,7 @@
                 ></div>
             </div>
         </div>
-        <div class="column description">
-            <div class="row">
-                <div class="label"><label for="deckDescription">Description</label></div>
-                <div class="info-tooltip" id="descriptionInfo"
-                     help="Example help text for description"
-                ></div>
-            </div>
-            <div class="row">
-                <textarea id="deckDescription"></textarea>
-            </div>
-        </div>
+        <div class="column autocomplete"></div>
     </div>
 </div>
 
