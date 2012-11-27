@@ -1,4 +1,7 @@
 <?php
+/**
+* Written by: Kirk McCulloch
+**/
 require_once("../classes/SQLAccess.class.php");
 
 $db = new SQLAccess();

@@ -1,4 +1,7 @@
 <?php
+/**
+* Written by: Kirk McCulloch
+**/
 require_once("SQLAccess.class.php");
 
 class Deck 
