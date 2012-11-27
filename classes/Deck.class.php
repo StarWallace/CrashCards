@@ -58,6 +58,22 @@ class Deck
     }
 	
 	/************************************************************
+	*FUNCTION:    CheckIfClipped
+	*PURPOSE:     check if this deck is already clipped by the user
+	*NOTE:		  This function assumes that the deck object has its attributes filled
+	*RETURN:      true or false
+	************************************************************/
+	function CheckIfClipped($uid)
+	{
+		//check the db for an existing clip
+		$qryCheck = $this->db->selectQuery("*", "ccClips", "uid = $uid AND deckid = " . $this->deckid);
+		//if the check query found an existing clip entry, true, else false
+		$result = ($qryCheck->num_rows > 0);
+		
+		return $result;
+	}
+	
+	/************************************************************
 	*FUNCTION:    GetDeckXML
 	*PURPOSE:     returns the XML string of the cards for this deck
 	*NOTE:		  This function assumes that the deck object has its attributes filled

@@ -82,6 +82,22 @@ CREATE TABLE IF NOT EXISTS ccvotes (
   KEY deckid (deckid)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table 'ccclips'
+--
+
+DROP TABLE IF EXISTS ccclips CASCADE;
+CREATE TABLE IF NOT EXISTS ccclips (
+  uid int(10) NOT NULL,
+  deckid int(10) NOT NULL,
+  PRIMARY KEY (uid,deckid),
+  KEY uid (uid),
+  KEY deckid (deckid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 --
 -- Constraints for table `cccourses`
 --
@@ -102,3 +118,10 @@ ALTER TABLE `ccdecks`
 ALTER TABLE `ccvotes`
   ADD CONSTRAINT ccvotes_ibfk_2 FOREIGN KEY (uid) REFERENCES ccusers (uid) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT ccvotes_ibfk_1 FOREIGN KEY (deckid) REFERENCES ccdecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ccclips`
+--
+ALTER TABLE `ccclips`
+  ADD CONSTRAINT ccclips_ibfk_2 FOREIGN KEY (deckid) REFERENCES ccdecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT ccclips_ibfk_1 FOREIGN KEY (uid) REFERENCES ccusers (uid) ON DELETE CASCADE ON UPDATE CASCADE;
