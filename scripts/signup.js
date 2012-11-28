@@ -154,6 +154,18 @@ $("input").change( function() {
     }
 });
 
+$("input").keydown( function(event) {
+    if (event.which == 13 && canSubmit()) {
+        document.forms["signup-form"].submit();
+    }
+});
+
+$("#signup").keydown( function(event) {
+    if (event.which == 13 && canSubmit()) {
+        document.forms["signup-form"].submit();
+    }
+})
+
 $(".signup").first().focus( function() {
     $("#signup").focus();
 });
@@ -200,3 +212,7 @@ function validateForm() {
         return true;
     }
 }
+
+$("#signup").click( function() {
+    document.forms["signup-form"].submit();
+});

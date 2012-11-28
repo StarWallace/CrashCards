@@ -82,8 +82,8 @@
             <div class="note" id="aliasNote"></div>
         </div>
         <div class="centred signup" tabindex="6">
-            <input type="submit" class="button" id="signup" value="Sign Up" tabindex="7"/>
-            <input type="button" class="button" id="next" value="Next" tabindex="7"/>
+            <div class="button" id="signup" tabindex="7">Sign Up</div>
+            <div class="button" id="next" tabindex="7">Next</div>
         </div>
     </form>
 </div>

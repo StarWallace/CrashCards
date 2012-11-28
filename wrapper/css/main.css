@@ -77,14 +77,11 @@ input.login {
     width: 150px;
 }
 
-.facebook {
-    background-color: #5d79ae !important;
-}
-
 #userBar {
     width: 100%;
     height: 75px;
 	box-shadow: 0 0 10px 0px #888888;
+    position: relative;
 }
 
 #userBar .banner {
@@ -92,6 +89,16 @@ input.login {
     float: left;
     height: 100%;
     background-image: url("../images/banner.png");
+}
+
+#userBar #displayName {
+    font-size: 10pt;
+    font-weight: bold;
+    width: 385px;
+    left: 300px;
+    text-align: right;
+    position: absolute;
+    top: 25px;
 }
 
 #userBar .controlBar {
@@ -106,6 +113,17 @@ input.login {
     width: 50px;
     float: left;
     height: 50px;
+}
+
+.loginBar {
+    float: right;
+    margin-right: 20px;
+}
+
+#loginMessage {
+    line-height: 25px;
+    height: 20px;
+    padding-top: 5px;
 }
 
 .control#search {
@@ -297,4 +315,13 @@ div.info-tooltip {
 @font-face {
 	font-family: 'Handwriting';
     src: url('../fonts/ayearwithoutrain.ttf') format('truetype');
+}
+
+#login.button {
+    margin-top: 10px;
+}
+
+.err {
+    color: #333388;
+    font-size: 10pt;
 }

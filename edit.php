@@ -9,8 +9,8 @@
 <link rel="stylesheet" type="text/css" href="wrapper/css/edit.css"/>
 
 <div class="cardControls">
-    <div class="button" id="publishDeck">Publish</div>
-    <div class="button" id="saveDeck">Save</div>
+    <div class="button publishDeck">Publish</div>
+    <div class="button saveDeck">Save</div>
 </div>
 
 <div class="deckInfo white">
@@ -24,28 +24,22 @@
                 ></div>
             </div>
             <div class="row">
+                <div class="label"><label for="deckSubject">Subject</label></div>
+                <input id="deckSubject"/>
+                <div class="info-tooltip" id="subjectInfo"
+                     help="Example help text for subject"
+                ></div>
+            </div>
+            <div class="row">
                 <div class="label"><label for="deckCourseCode">Course Code</label></div>
                 <input id="deckCourseCode"/>
                 <div class="info-tooltip" id="courseCodeInfo"
                      help="Example help text for course info"
                 ></div>
             </div>
-            <div class="row">
-                <div class="label"><label for="deckProfessor">Professor</label></div>
-                <input id="deckProfessor"/>
-                <div class="info-tooltip" id="professorInfo"
-                     help="Example help text for professor"
-                ></div>
-            </div>
-            <div class="row">
-                <div class="label"><label for="deckCampus">Campus</label></div>
-                <input id="deckCampus"/>
-                <div class="info-tooltip" id="campusInfo"
-                     help="Example help text for campus"
-                ></div>
-            </div>
         </div>
-        <div class="column autocomplete"></div>
+        <div class="column" id="autocomplete"></div>
+        <div class="column" id="message"></div>
     </div>
 </div>
 
@@ -70,8 +64,8 @@
 </div>
 
 <div class="cardControls">
-    <div class="button" id="publishDeck">Publish</div>
-    <div class="button" id="saveDeck">Save</div>
+    <div class="button publishDeck">Publish</div>
+    <div class="button saveDeck">Save</div>
     <div class="button" id="newCard">New Card</div>
 </div>
 

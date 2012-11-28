@@ -7,7 +7,7 @@ class Deck
 	public $deckid, $creatorid, $title, $coursecode, $subject, $tstamp, $upv, $dnv, $cardcount, $pubed;
 	private $db;
 
-	function __construct($deckid="", $creatorid="", $title="", $coursecode="", $subject="", $tstamp="", $upv="", $dnv="", $cardcount="" $pubed="")
+	function __construct($deckid="", $creatorid="", $title="", $coursecode="", $subject="", $tstamp="", $upv="", $dnv="", $cardcount="", $pubed="")
 	{
 		//all cases need this
 		$this->db = new SQLAccess();
@@ -53,7 +53,7 @@ class Deck
 		$this->cardcount = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($cardcount)));	
 		$this->pubed = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($pubed)));
     }
-	
+    
 	/************************************************************
 	*FUNCTION:    GetDeckXML
 	*PURPOSE:     returns the XML string of the cards for this deck
@@ -97,9 +97,9 @@ class Deck
 	function SaveDeckXML($xml)
 	{
 		//path string for the deck location and name
-		$deckPath = "decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
+		$deckPath = $_SERVER['DOCUMENT_ROOT'] . "/decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
 		//open file handler, will be created if it does not exist
-		$fp = fopen($deckpath, "w+");
+        $fp = fopen($deckPath, "w+");
 		//write xml into file
 		fwrite($fp, $xml);
 		//close file handler
@@ -142,12 +142,12 @@ class Deck
 			$qryCourse = $this->db->selectQuery("coursecode", "ccCourses", "coursecode = '" . $this->coursecode . "'");
 			if ($qryCourse->num_rows < 1) //if the coursecode does not exist
 			{
-				$qryCourse = $this->db->insertQuery("ccCourses", "coursecode, subject", "'" . $this->coursecode . "', " . $this->subject . "'");
+				$qryCourse = $this->db->insertQuery("ccCourses", "coursecode, subject", "'" . $this->coursecode . "', '" . $this->subject . "'");
 			}
 			$qrySave = $this->db->insertQuery(
 						"ccDecks",
-						"deckid, dcreatorid, title, coursecode, subject, desc, tstamp, upv, dnv, cardcount, pubed",
-						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', CURDATE(), '" . $this->upv . "', '" . $this->dnv . "', '" . $this->cardcount . "', '" . $this->pubed . "'");
+						"deckid, creatorid, title, coursecode, subject, tstamp, upv, dnv, cardcount, pubed",
+						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', CURDATE(), " . $this->upv . ", " . $this->dnv . ", " . $this->cardcount . ", " . $this->pubed);
 			$result = $qrySave;
 		}
 		return $result;

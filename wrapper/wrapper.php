@@ -7,10 +7,11 @@
 <!-- BEGIN THEME -->
 <?php require 'opener.php'; ?>
 <?php
-//  if (logged in)
+    if (isset($_COOKIE['user'])) {
         require 'userbar.php';
-//  else
-//      require 'loginbar.php';
+    } else {
+        require 'loginbar.php';
+    }
 ?>
 
 <div class="centred" id="wrapper">

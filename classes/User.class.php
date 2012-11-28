@@ -12,7 +12,6 @@ class User {
 		
 		if ($uid != "")
 		{
-			$this->db = new SQLAccess();
 			//get full user data
 			$qryUser = $this->db->selectQuery(
 				"*",
@@ -74,7 +73,7 @@ class User {
 		{
 			$result .= "<p class='err'>Invalid email was entered. Can only contain letters, numbers, dots, underscores, and dashes. Use the form john_doe@example.com.</p>";
 		}
-		if (preg_match("/^[A-Za-z \-']?$/", $this->name) == 0)
+		if ($this->name != "" && preg_match("/^[A-Za-z '-]+$/", $this->name) == 0)
 		{
 			$result .= "<p class='err'>Invalid name was entered. Can only contain letters, dashes, spaces, and apostrophes.</p>";
 		}
@@ -220,6 +219,8 @@ class User {
 			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias']);
 			//place a copy of the object as a cookie to track the logged in user
 			setcookie("user", serialize($this), time()+3600*24*365);
+            session_start();
+            $_SESSION['display_name'] = $this->GetDisplayName();
 			$result = true;
 		}
 		else

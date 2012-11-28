@@ -101,11 +101,11 @@ $("#newCard").click( function() {
     addNewCard();
 });
 
-$("#saveDeck").click( function() {
+$(".saveDeck").click( function() {
     saveDeck();
 });
 
-$("#publishDeck").click( function() {
+$(".publishDeck").click( function() {
     publishDeck();
 });
 
@@ -147,9 +147,56 @@ function addNewCard() {
 }
 
 function saveDeck() {
-    // TODO
+    makeAllInactive();
+    var selector = ".cardSummary";
+    $xml = $("<xml></xml>");
+    $deck = $("<deck></deck>");
+    
+    $(".cardRow").each( function() {
+        $front = $("<front>" + $(this).find(selector).eq(0).html() + "</front>");
+        $back = $("<back>" + $(this).find(selector).eq(1).html() + "</back>");
+        $card = $("<card></card>");
+        $card.append($front).append($back);
+        $deck.append($card);
+    });
+    
+    $xml.append($deck);
+    
+    var request = $.ajax({
+        type: "POST",
+        url: "scripts/AJAXDeckSave.php",
+        data: {
+            // deckid
+            title: $("#deckTitle").val(),
+            coursecode: $("#deckCourseCode").val(),
+            subject: $("#deckSubject").val(),
+            cardcount: $(".cardRow").last().find(".number").html(),
+            xml: $xml.html()
+        }
+    });
+    
+    request.done( function(msg) {
+        $("#message").html(msg);
+    });
+    
+    request.fail( function(msg) {
+        $("#message").html(msg);
+    });
 }
 
 function publishDeck() {
-    // TODO
+    // Save Deck
+    saveDeck();
+    
+    // Publish Deck
+    var request = $.ajax({
+        type: "POST",
+        url: "scripts/AJAXDeckPublish.php",
+        data: {
+            // deckid
+        }
+    });
+    
+    // Redirect to Manage screen
+    window.location.href = "manage.php";
 }

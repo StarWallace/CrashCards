@@ -58,10 +58,6 @@ input.button {
     display: none;
 }
 
-.err {
-    color: #333388;
-}
-
 .valid {
     font-style: italic;
     font-weight: bold;

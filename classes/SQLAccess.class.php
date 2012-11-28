@@ -308,7 +308,7 @@
          *************************************************************/
         function __destruct()
         {
-            $this->dbConnect->close();            
+            $this->dbConnect->close();
         }
     }//end of class
 ?>

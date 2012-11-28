@@ -1,5 +1,5 @@
 .deckInfo {
-    height: 150px;
+    height: 120px;
 }
 
 .deckInfo input {
@@ -101,4 +101,8 @@
 .cardControls {
     height: 30px;
     margin: 10px 0 10px 0;
+}
+
+#autocomplete {
+    display: none;
 }
