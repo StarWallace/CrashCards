@@ -105,4 +105,13 @@
 
 #autocomplete {
     display: none;
+    width: 360px;
+}
+
+#message {
+    width: 360px;
+}
+
+.cardRow .remove {
+    display: none;
 }

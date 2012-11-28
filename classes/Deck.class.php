@@ -92,19 +92,17 @@ class Deck
     }    
 	
 	/************************************************************
-	*FUNCTION:    GetDeckJSON
-	*PURPOSE:     returns the JSON string of the cards for this deck
+	*FUNCTION:    GetDeckArray
+	*PURPOSE:     returns an array of the cards for this deck
 	*NOTE:		  This function assumes that the deck object has its attributes filled
-	*RETURN:      a string with the JSON data
+	*RETURN:      an array with the cards data
 	************************************************************/
-	function GetDeckJSON()
+	function GetDeckArray()
 	{
 		$xmlStr = $this->GetDeckXML();
 		$xmlOb = simplexml_load_string($xmlStr);
-		$xmlArr = objectsIntoArray($xmlOb);
-		$jsonArr['deck'] = $xmlArr['card'];
-		$json = json_encode($arrXml);
-		return $json;
+		$xmlArr = $this->objectsIntoArray($xmlOb);
+		return $xmlArr['card'];
 	}
 	
 	/************************************************************
@@ -167,7 +165,7 @@ class Deck
 						"ccDecks",
 						"deckid, creatorid, title, coursecode, subject, tstamp, upv, dnv, cardcount, pubed",
 						"NULL, '" . $this->creatorid . "', '" . $this->title . "', '" . $this->coursecode . "', '" . $this->subject . "', CURDATE(), " . $this->upv . ", " . $this->dnv . ", " . $this->cardcount . ", " . $this->pubed);
-			$result = $qrySave;
+			$result = mysqli_insert_id($this->db->dbConnect);
 		}
 		return $result;
 	}
@@ -192,7 +190,7 @@ class Deck
 			{
 				if (is_object($value) || is_array($value)) 
 				{
-					$value = objectsIntoArray($value, $arrSkipIndices); // recursive call
+					$value = $this->objectsIntoArray($value, $arrSkipIndices); // recursive call
 				}
 				if (in_array($index, $arrSkipIndices)) 
 				{

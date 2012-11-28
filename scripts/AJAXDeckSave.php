@@ -8,15 +8,11 @@
     
 	$db = new SQLAccess();
     $user = unserialize($_COOKIE['user']);
-	
-    $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $queryString = $queryString['query'];
-    parse_str($queryString, $params);
-    $deckid = isset($params['deckid']) ? $params['deckid'] : "";
 
 	//if all info given
 	if (isset($_REQUEST['title']) && isset($_REQUEST['coursecode']) && isset($_REQUEST['subject']) && isset($_REQUEST['cardcount']) && isset($_REQUEST['xml']))
 	{
+        $deckid = $_REQUEST['deckid'];
 		$creatorid = $user->uid;
 		$title = $_REQUEST['title'];
 		$coursecode = $_REQUEST['coursecode'];
@@ -33,17 +29,18 @@
             //verify that the deck's original creator is logged in
             if ($user->uid != $deck->creatorid)
             {
-                return "<p class='err'>You must be logged in to save this deck.</p>";
+                echo "<p class='err'>You must be logged in to save this deck.</p>";
             }
             
 			//fill the deck object with the passed in data, thus making any changes
 			$deck->FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $deck->tstamp, $deck->upv, $deck->dnv, $cardcount, 0);
 			
-            $dbsave = $deck->SaveDeckToDB();
+            $dbsave = $deck->SaveDeckToDB(true);
 			$db->runQuery("UPDATE ccDecks SET tstamp = CURDATE() WHERE deckid = $deckid");
 		}
 		else //this is a new deck
 		{
+            
 			$deck = new Deck();
             $deck->FillDeck(0, $creatorid, $title, $coursecode, $subject, "", 0, 0, $cardcount, 0);
             
@@ -52,7 +49,7 @@
 			if (isset($dbsave))
 			{
 				//get the deckid of the deck just created
-                $deckid = mysql_insert_id();
+                $deckid = $dbsave;
             }
 		}
         

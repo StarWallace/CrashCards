@@ -162,24 +162,28 @@ function saveDeck() {
     
     $xml.append($deck);
     
+    var ajaxData = new Object();
+    ajaxData.title = $("#deckTitle").val();
+    ajaxData.coursecode = $("#deckCourseCode").val();
+    ajaxData.subject = $("#deckSubject").val();
+    ajaxData.cardcount = $(".cardRow").last().find(".number").html();
+    ajaxData.xml = $xml.html();
+    
+    if (deckid != null) {
+        ajaxData.deckid = deckid;
+    }
+    
     var request = $.ajax({
         type: "POST",
         url: "scripts/AJAXDeckSave.php",
-        data: {
-            // deckid
-            title: $("#deckTitle").val(),
-            coursecode: $("#deckCourseCode").val(),
-            subject: $("#deckSubject").val(),
-            cardcount: $(".cardRow").last().find(".number").html(),
-            xml: $xml.html()
-        }
+        data: ajaxData
     });
     
     request.done( function(msg) {
         $("#message").html(msg);
     });
     
-    request.fail( function(msg) {
+    request.fail( function(msg) { 
         $("#message").html(msg);
     });
 }

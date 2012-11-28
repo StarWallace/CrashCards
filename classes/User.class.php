@@ -248,6 +248,7 @@ class User {
 			$this->FillUser($aInfo['uid'], $aInfo['email'], $aInfo['name'], $aInfo['alias']);
 			//place a copy of the object as a cookie to track the logged in user
 			setcookie("user", serialize($this), time()+3600*24*365);
+            $_COOKIE['user'] = serialize($this);
             session_start();
             $_SESSION['display_name'] = $this->GetDisplayName();
 			$result = true;
