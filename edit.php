@@ -1,9 +1,5 @@
-<?php 
-	/*
-	* When using the wrapper system this must be called at the top of every page.
-	* It basically just says to "start output"
-	*/
-	ob_start(); 
+<?php
+	ob_start();
 ?>	
 
 <link rel="stylesheet" type="text/css" href="wrapper/css/edit.css"/>
@@ -46,6 +42,15 @@
 <br/>
 
 <div class="cardList white" id="sortable">
+    <?php
+        if (isset($_GET['deckid'])) {
+            $deck = new Deck($_GET['deckid']);
+            $deckCards = $deck->GetDeckJSON();
+            $deckCards = json_decode($deckCards, true);
+            echo $deckCards;
+        } else {
+    ?>
+    
     <div class="cardRow">
         <div class="number">1</div>
         <div class="minDisplay">
@@ -61,6 +66,9 @@
         <div class="remove"></div>
     </div>
     
+    <?php
+        }
+    ?>
 </div>
 
 <div class="cardControls">
@@ -70,14 +78,12 @@
 </div>
 
 <?php
-	/*
-	* When using the wrapper system this must be called at the top of every page.
-	* It basically just sets a custom title for the page and then pulls in the wrapper
-	*/
     $sTitle = "Edit Deck";
-    
     require_once("wrapper/wrapper.php");
 ?>
 
 <script type="text/javascript" src="scripts/edit.js"></script>
 <script type="text/javascript" src="scripts/tooltip.js"></script>
+<script type="text/javascript">
+    var deckid = <?php echo "1"; ?>
+</script>
