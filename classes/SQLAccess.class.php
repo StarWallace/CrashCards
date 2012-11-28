@@ -1,4 +1,7 @@
 <?php
+/**
+* Written by: Kirk McCulloch
+**/
     /****************************************************************
      *CLASS:  SQLAccess
      *Purpose:  Create a connection to a MySQL Server.  Create and

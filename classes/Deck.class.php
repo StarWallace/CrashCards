@@ -1,4 +1,7 @@
 <?php
+/**
+* Written by: Kirk McCulloch
+**/
 require_once("SQLAccess.class.php");
 
 class Deck 
@@ -54,6 +57,22 @@ class Deck
 		$this->pubed = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($pubed)));
     }
     
+	/************************************************************
+	*FUNCTION:    CheckIfClipped
+	*PURPOSE:     check if this deck is already clipped by the user
+	*NOTE:		  This function assumes that the deck object has its attributes filled
+	*RETURN:      true or false
+	************************************************************/
+	function CheckIfClipped($uid)
+	{
+		//check the db for an existing clip
+		$qryCheck = $this->db->selectQuery("*", "ccClips", "uid = $uid AND deckid = " . $this->deckid);
+		//if the check query found an existing clip entry, true, else false
+		$result = ($qryCheck->num_rows > 0);
+		
+		return $result;
+	}
+	
 	/************************************************************
 	*FUNCTION:    GetDeckXML
 	*PURPOSE:     returns the XML string of the cards for this deck

@@ -1,4 +1,7 @@
 <?php
+/**
+* Written by: Kirk McCulloch
+**/
 	require_once("../classes/SQLAccess.class.php");
 	require_once("../classes/Deck.class.php");
     require_once("../classes/User.class.php");
@@ -36,10 +39,8 @@
 			//fill the deck object with the passed in data, thus making any changes
 			$deck->FillDeck($deckid, $creatorid, $title, $coursecode, $subject, $deck->tstamp, $deck->upv, $deck->dnv, $cardcount, 0);
 			
-			//TODO: HOW TO AUTO SET THE TIME STAMP USING CURDATE()
-            
             $dbsave = $deck->SaveDeckToDB();
-            
+			$db->runQuery("UPDATE ccDecks SET tstamp = CURDATE() WHERE deckid = $deckid");
 		}
 		else //this is a new deck
 		{

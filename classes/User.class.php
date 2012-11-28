@@ -1,4 +1,7 @@
 <?php
+/**
+* Written by: Kirk McCulloch
+**/
 require_once("SQLAccess.class.php");
 
 class User {
@@ -41,6 +44,32 @@ class User {
 			$result = $this->name;
 		}
 		return $result;
+	}
+	
+	/************************************************************
+	*FUNCTION:    GetCollection
+	*PURPOSE:     To get an array of the user's clipped decks
+	*NOTES:		  This function assumes that the user object has been filled with valid user data
+	*RETURN:      An array of all clipped decks
+	************************************************************/
+	function GetCollection()
+	{
+		//query for a list of all clipped decks
+		$qryClips = $this->db->selectQuery("deckid", "ccClips", "uid = " . $this->uid);
+		$sRows = $qryClips->num_rows;
+		//array to store the result
+		$aResult = Array();
+		
+		for ($i = 0; $i < $nRows; $i++)
+		{
+			//fetch_assoc gets an associative array of the next record in the result set
+			// it uses a cursor to always get the NEXT record with each subsequent call
+			$clip = $qryClips->fetch_assoc();
+			//add this deckid to the array
+			$aResult[$i] = $clip['deckid'];
+		}
+		
+		return $aResult;
 	}
 	
 	/**
