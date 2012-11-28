@@ -5,6 +5,8 @@
 require_once("SQLAccess.class.php");
 
 class User {
+	//the rate at which a user earns views per deck they submit
+	const EARN_RATE = 5;
 	
 	public $uid, $email, $name, $alias;
 	private $db;
@@ -34,16 +36,20 @@ class User {
 	************************************************************/
 	function GetDisplayName()
 	{
-		$result = "Anonymous";
-		if ($this->alias != "")
-		{
-			$result = $this->alias;
-		}
-		elseif ($this->name != "")
-		{	
-			$result = $this->name;
-		}
-		return $result;
+		//if alias is set return alias or default to anonymous
+		return (isset($this->alias) && $this->alias != "") ? $this->alias : "Anonymous";
+	}
+	
+	/************************************************************
+	*FUNCTION:    GetReferenceName
+	*PURPOSE:     To get a reference identity for this user
+	*NOTES:		  This function assumes that the user object has been filled with valid user data
+	*RETURN:      A string to print for user identity display
+	************************************************************/
+	function GetReferenceName()
+	{
+		//if name is set return name or default to email
+		return (isset($this->name) && $this->name != "") ? $this->name : $this->email;
 	}
 	
 	/************************************************************
@@ -70,6 +76,51 @@ class User {
 		}
 		
 		return $aResult;
+	}
+	
+	/************************************************************
+	*FUNCTION:    LogDeckView
+	*PURPOSE:     To log a user's viewing of a deck intothe database
+	*NOTES:		  This function assumes that the user object has been filled with valid user data
+	************************************************************/
+	function LogDeckView($deckid)
+	{
+		//check to see if this user owns the deck (if a deck is returned, then this user created this deck)
+		$qryOwner = $this->db->selectQuery("*", "ccDecks", "deckid = $deckid AND creatorid = " . $this->uid);
+		
+		//check the db for an existing view
+		$qryCheck = $this->db->selectQuery("*", "ccViews", "deckid = $deckid AND uid = " . $this->uid);
+		
+		//if this user is not the owner and no view exists
+		if ($qryOwner->num_rows < 1 && $qryCheck->num_rows < 1)
+		{
+			//insert the new view
+			$qryView = $this->db->insertQuery("ccViews", "deckid, uid", "$deckid, " . $this->uid);
+		}
+	}
+	
+	/************************************************************
+	*FUNCTION:    GetAvailableViewCount
+	*PURPOSE:     To get the count of how many views this user has left
+	*NOTES:		  This function assumes that the user object has been filled with valid user data
+	*RETURN:      int value of allowed views
+	************************************************************/
+	function GetAvailableViewCount()
+	{
+		//get the count of this user's decks
+		$qryDecks = $this->db->selectQuery("COUNT(*)", "ccDecks", "creatorid = " . $this->uid);
+		$deckCount = $qryDecks->fetch_row();
+		$deckCount = $deckCount[0];
+		//multiply to determine views earned
+		$viewsEarned = ($deckCount * EARN_RATE) + EARN_RATE;
+			//add a buffer of 1 EARN_RATE to account for new users
+		//get the count of this user's views
+		$qryViews = $this->db->selectQuery("COUNT(*)", "ccViews", "uid = " . $this->uid);
+		$viewsUsed = $qryViews->fetch_row();
+		$viewsUsed = $viewsUsed[0];
+		
+		//return earned minus used
+		return $viewsEarned - $viewsUsed;
 	}
 	
 	/**
@@ -249,8 +300,14 @@ class User {
 			//place a copy of the object as a cookie to track the logged in user
 			setcookie("user", serialize($this), time()+3600*24*365);
             $_COOKIE['user'] = serialize($this);
-            session_start();
-            $_SESSION['display_name'] = $this->GetDisplayName();
+			setcookie("userjson", json_encode($this), time()+3600*24*365);
+			$_COOKIE['userjson'] = json_encode($this);
+			setcookie("useralias", $this->GetDisplayName(), time()+3600*24*365);
+			$_COOKIE['useralias'] = $this->GetDisplayName();
+			setcookie("username", $this->GetReferenceName(), time()+3600*24*365);
+			$_COOKIE['username'] = $this->GetReferenceName();
+            // session_start();
+            // $_SESSION['display_name'] = $this->GetDisplayName();
 			$result = true;
 		}
 		else
@@ -265,6 +322,12 @@ class User {
 	{
 		setcookie("user", "", 0);
 		unset($_COOKIE['user']);
+		setcookie("userjson", "", 0);
+		unset($_COOKIE['userjson']);
+		setcookie("useralias", "", 0);
+		unset($_COOKIE['useralias']);
+		setcookie("username", "", 0);
+		unset($_COOKIE['username']);
 	}
 	
 	function FreshCookie()
@@ -272,7 +335,13 @@ class User {
 		if (isset($_COOKIE['user']))
 		{
 			setcookie("user", serialize($this), time()+3600*24*365);
-			$_COOKIE['user'] = serialize($this);
+            $_COOKIE['user'] = serialize($this);
+			setcookie("userjson", json_encode($this), time()+3600*24*365);
+			$_COOKIE['userjson'] = json_encode($this);
+			setcookie("useralias", $this->GetDisplayName(), time()+3600*24*365);
+			$_COOKIE['useralias'] = $this->GetDisplayName();
+			setcookie("username", $this->GetReferenceName(), time()+3600*24*365);
+			$_COOKIE['username'] = $this->GetReferenceName();
 		}
 	}
 }

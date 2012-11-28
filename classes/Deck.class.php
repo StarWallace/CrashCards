@@ -106,6 +106,22 @@ class Deck
 	}
 	
 	/************************************************************
+	*FUNCTION:    GetDeckJSON
+	*PURPOSE:     returns the JSON string of the cards for this deck
+	*NOTE:		  This function assumes that the deck object has its attributes filled
+	*RETURN:      a string with the JSON data
+	************************************************************/
+	function GetDeckJSON()
+	{
+		$xmlStr = $this->GetDeckXML();
+		$xmlOb = simplexml_load_string($xmlStr);
+		$xmlArr = $this->objectsIntoArray($xmlOb);
+		$jsonArr['deck'] = $xmlArr['card'];
+		$json = json_encode($arrXml);
+		return $json;
+	}
+	
+	/************************************************************
 	*FUNCTION:    CheckDupUser
 	*PURPOSE:     Call to check if the user object's email is in use by an existing user
 	*							 This function assumes that the email attribute is set
