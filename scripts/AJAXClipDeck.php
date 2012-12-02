@@ -12,7 +12,9 @@
 	$db = new SQLAccess();
 	
 	//get passed data
-	$uid = $_REQUEST['uid'];
+	//$uid = json_decode(file_get_contents("GetCurrentUser.php"), true);//$_REQUEST['uid'];
+	$user = unserialize($_COOKIE['user']);
+	$uid = $user->uid;
 	$deckid = $_REQUEST['deckid'];
 	$result = true; //default to true
 	

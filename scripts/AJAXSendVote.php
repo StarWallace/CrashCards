@@ -14,7 +14,9 @@
 	
 	//get passed data
 	$deckid = $_REQUEST['deckid'];
-	$uid = $_REQUEST['uid'];
+	//$uid = json_decode(file_get_contents("GetCurrentUser.php"), true);//$_REQUEST['uid'];
+	$user = unserialize($_COOKIE['user']);
+	$uid = $user->uid;
 	$isupv = $_REQUEST['isupv'];
 	$result = true; //default to true
 

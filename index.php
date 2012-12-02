@@ -30,7 +30,7 @@
 	* When using the wrapper system this must be called at the top of every page.
 	* It basically just sets a custom title for the page and then pulls in the wrapper
 	*/
-    $sTitle = "Browse";
+    $sTitle = "Welcome";
     
     require_once("wrapper/wrapper.php");
 ?>
