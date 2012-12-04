@@ -260,6 +260,38 @@ class User {
 		
 		return $result;
 	}
+	
+	/************************************************************
+	*FUNCTION:    UpdateUserMeta
+	*PURPOSE:     Call to update the user's personal information settings
+	*PARAMS:      email - new email
+	*             name - new name
+	*			  alias - new alias
+	*RETURN:      True on match, error message string otherwise
+	************************************************************/
+	function UpdateUserMeta($email, $name, $alias)
+	{
+		//place the passed in info in the user object
+		$this->FillUser($this->uid, $email, $name, $alias);
+		//check for any invalid values.
+		$result = $this->ValidateInfo();
+		
+		//if all info is valid
+		if ($result === false)
+		{
+			$aUpdate = Array();
+			$aUpdate['uid'] = $this->uid;
+			$aUpdate['email'] = $this->email;
+			$aUpdate['name'] = $this->name;
+			$aUpdate['alias'] = $this->alias;
+			//send update query
+			$qrySave = $this->db->updateQuery("ccUsers", $aUpdate, "uid");
+			$this->FreshCookie();
+			$result = $qrySave;
+		}
+		
+		return $result;
+	}
 
 	/************************************************************
 	*FUNCTION:    CheckValidCredentials
