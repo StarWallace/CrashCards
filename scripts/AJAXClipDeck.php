@@ -16,10 +16,11 @@
         "message" => ""
     );
 	
-	//get passed data
+	
     if (isset($_COOKIE['user'])) {
         if (isset($_REQUEST['deckid'])) {
             $user = unserialize($_COOKIE['user']);
+            //get passed data
             $deckid = $_REQUEST['deckid'];
             $deck = new Deck($deckid);
             if ($deck->creatorid != "") {

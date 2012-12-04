@@ -28,6 +28,11 @@ class User {
 		}
 	}
 	
+	function __wakeup()
+	{
+		$this->db = new SQLAccess();
+	}
+	
 	/************************************************************
 	*FUNCTION:    GetDisplayName
 	*PURPOSE:     To get a display identity for this user
@@ -339,14 +344,31 @@ class User {
 	
 	function Logout()
 	{
-		setcookie("user", "", 0);
-		unset($_COOKIE['user']);
-		setcookie("userjson", "", 0);
-		unset($_COOKIE['userjson']);
-		setcookie("useralias", "", 0);
-		unset($_COOKIE['useralias']);
-		setcookie("username", "", 0);
-		unset($_COOKIE['username']);
+		echo "<br />logout called<br />";
+		if (isset($_COOKIE['user']))
+		{
+			setcookie("user", "", time() - 42000);
+			unset($_COOKIE['user']);
+			echo "done user<br />";
+		}
+		if (isset($_COOKIE['userjson']) )
+		{
+			setcookie("userjson", "", time() - 42000);
+			unset($_COOKIE['userjson']);
+			echo "done userjson<br />";
+		}
+		if (isset($_COOKIE['useralias']) )
+		{
+			setcookie("useralias", "", time() - 42000);
+			unset($_COOKIE['useralias']);
+			echo "done useralias<br />";
+		}
+		if (isset($_COOKIE['username']))
+		{
+			setcookie("username", "", time() - 42000);
+			unset($_COOKIE['username']);
+			echo "done username<br />";
+		}
 	}
 	
 	function FreshCookie()

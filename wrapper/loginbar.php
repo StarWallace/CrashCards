@@ -2,14 +2,15 @@
 
 <?php
     $loginResult = "";
-    if ((isset($_POST['username']) || isset($_POST['password'])) && !isset($_POST['confirm'])) {
-        $user = isset($_POST['username']) ? $_POST['username'] : "";
+    if ((isset($_POST['email']) || isset($_POST['password'])) && !isset($_POST['confirm'])) {
+        $user = isset($_POST['email']) ? $_POST['email'] : "";
         $pass = isset($_POST['password']) ? $_POST['password'] : "";
         require_once("classes/User.class.php");
         $User = new User();
         $loginResult = $User->Login($user, $pass);
         if ($loginResult === true) {
-            header('Location: ' . $_SERVER['REQUEST_URI']);
+            //header('Location: ' . $_SERVER['REQUEST_URI']);
+			header('Location: index.php');
         } else {
             $loginResult = strip_tags($loginResult);
         }
@@ -18,11 +19,11 @@
 
 <div class="top fixed" id="topBar">
     <div class="centred white loginBar" id="userBar">
-        <div class="banner" title="CrashCards"></div>
+        <a href="index.php?"><div class="banner" title="CrashCards"></div></a>
         <div class="loginBar">
             <div id="loginMessage" class="err"><?php echo $loginResult; ?></div>
             <form id="login-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST">
-                <input name="username" class="login" placeholder="User Name" tabindex="101"/>
+                <input name="email" class="login" placeholder="Email" tabindex="101"/>
                 <input name="password" class="login" type="password" placeholder="Password" tabindex="102"/>
                 <div id="login" class="button" tabindex="103">Log In</div>
             </form>

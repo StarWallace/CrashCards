@@ -37,7 +37,7 @@
         $uid = $user->uid;
         $isupv = $_REQUEST['isupv'];
         
-        //$result = true; //default to true
+        //$uid = json_decode(file_get_contents("GetCurrentUser.php"), true);//$_REQUEST['uid'];
 
         //check the db for an existing vote
         $qryCheck = $db->selectQuery("*", "ccVotes", "deckid = $deckid AND uid = $uid");

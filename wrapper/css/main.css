@@ -226,7 +226,7 @@ input.login {
     width: 100px;
     float: right;
     margin-left: 20px;
-    background-color: #9999ff;
+    background-color: #6b6bb3;/*#9999ff;*/
     font-weight: bold;
     text-align: center;
     line-height: 30px;
@@ -237,7 +237,7 @@ input.login {
 }
 
 .button:hover {
-    background-color: #6b6bb3;
+    background-color: #9999ff; /*#6b6bb3;*/
 }
 
 .button:active {
