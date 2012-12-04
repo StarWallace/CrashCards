@@ -15,7 +15,7 @@ $(".removeCard.createdDeck").click( function() {
 });
 
 $(".removeCard.clippedDeck").click( function() {
-    modifyDeck("AJAXDeckUnclip.php", $(this).attr("deckid"));
+    modifyDeck("AJAXClipDeck.php", $(this).attr("deckid"));
 });
 
 function modifyDeck(resource, deckid) {
@@ -28,7 +28,7 @@ function modifyDeck(resource, deckid) {
     });
     
     request.done( function(result) {
-        if (JSON.parse(result).success == "1") {
+        if (JSON.parse(result).success != "0") {
             // Redirect to Manage screen
             window.location.href = "manage.php";
         } else {
