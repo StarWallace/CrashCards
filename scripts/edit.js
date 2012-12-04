@@ -102,11 +102,11 @@ $("#newCard").click( function() {
 });
 
 $(".saveDeck").click( function() {
-    saveDeck();
+    saveDeck(false);
 });
 
 $(".publishDeck").click( function() {
-    publishDeck();
+    saveDeck(true);
 });
 
 function renumberList() {
@@ -146,7 +146,7 @@ function addNewCard() {
     renumberList();
 }
 
-function saveDeck() {
+function saveDeck(publish) {
     makeAllInactive();
     var selector = ".cardSummary";
     $xml = $("<xml></xml>");
@@ -161,6 +161,8 @@ function saveDeck() {
     });
     
     $xml.append($deck);
+    
+    alert($xml.html());
     
     var ajaxData = new Object();
     ajaxData.title = $("#deckTitle").val();
@@ -179,28 +181,43 @@ function saveDeck() {
         data: ajaxData
     });
     
-    request.done( function(msg) {
-        $("#message").html(msg);
+    request.done( function(result) {
+        if (deckid == 0 && JSON.parse(result).success == "1" && JSON.parse(result).id != "0") {
+            deckid = JSON.parse(result).id;
+        }
+        if (publish == true) {
+            publishDeck();
+        } else {
+            $("#message").html(JSON.parse(result).message);
+        }
     });
     
     request.fail( function(msg) { 
-        $("#message").html(msg);
+        $("#message").html(JSON.parse(result).message);
     });
 }
 
 function publishDeck() {
-    // Save Deck
-    saveDeck();
-    
     // Publish Deck
     var request = $.ajax({
         type: "POST",
         url: "scripts/AJAXDeckPublish.php",
         data: {
-            // deckid
+            deckid: deckid
         }
     });
     
-    // Redirect to Manage screen
-    window.location.href = "manage.php";
+    request.done( function(result) {
+        if (JSON.parse(result).success == "1") {
+            // Redirect to Manage screen
+            window.location.href = "manage.php";
+        } else {
+            $("#message").html(JSON.parse(result).message);
+            $("#message").addClass("err");
+        }
+    });
+    
+    request.fail( function(result) {
+        $("#message").html(JSON.parse(result).message);
+    });
 }

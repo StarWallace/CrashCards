@@ -102,7 +102,11 @@ class Deck
 		$xmlStr = $this->GetDeckXML();
 		$xmlOb = simplexml_load_string($xmlStr);
 		$xmlArr = $this->objectsIntoArray($xmlOb);
-		return $xmlArr['card'];
+        if (!isset($xmlArr['card'][0])) {
+            return $xmlArr;
+        } else {
+            return $xmlArr['card'];
+        }
 	}
 	
 	/************************************************************
@@ -117,7 +121,7 @@ class Deck
 		$xmlOb = simplexml_load_string($xmlStr);
 		$xmlArr = $this->objectsIntoArray($xmlOb);
 		$jsonArr['deck'] = $xmlArr['card'];
-		$json = json_encode($arrXml);
+		$json = json_encode($xmlArr);
 		return $json;
 	}
 	
@@ -129,15 +133,30 @@ class Deck
 	************************************************************/
 	function SaveDeckXML($xml)
 	{
-		//path string for the deck location and name
-		$deckPath = $_SERVER['DOCUMENT_ROOT'] . "/decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
-		//open file handler, will be created if it does not exist
-        $fp = fopen($deckPath, "w+");
-		//write xml into file
-		fwrite($fp, $xml);
-		//close file handler
-		fclose($fp);
+        try {
+            //path string for the deck location and name
+            $deckPath = $_SERVER['DOCUMENT_ROOT'] . "/decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
+            //open file handler, will be created if it does not exist
+            $fp = fopen($deckPath, "w+");
+            //write xml into file
+            fwrite($fp, $xml);
+            $result = true;
+            fclose($fp);
+        } catch (Exception $e) {
+            fclose($fp);
+            $result = false;
+        }
+        return $result;
 	}
+	
+	/************************************************************
+	*FUNCTION:    IsCreator
+	*PURPOSE:     Call to check if given uid belongs to this deck's creator
+	*RETURN:      True if uid belongs to deck's creator, false otherwise
+	************************************************************/    
+    function IsCreator($uid) {
+        return $this->creatorid == $uid;
+    }
 	
 	/************************************************************
 	*FUNCTION:    CheckDupUser
@@ -162,6 +181,11 @@ class Deck
 			$aUpdate['dnv'] = $this->dnv;
 			$aUpdate['cardcount'] = $this->cardcount;
 			$aUpdate['pubed'] = $this->pubed;
+            $qryCourse = $this->db->selectQuery("coursecode", "ccCourses", "coursecode = '" . $this->coursecode . "'");
+			if ($qryCourse->num_rows < 1) //if the coursecode does not exist
+			{
+				$qryCourse = $this->db->insertQuery("ccCourses", "coursecode, subject", "'" . $this->coursecode . "', '" . $this->subject . "'");
+			}
 			$qrySave = $this->db->updateQuery("ccDecks", $aUpdate, "deckid");
 			$result = $qrySave;
 		}

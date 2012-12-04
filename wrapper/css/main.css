@@ -142,7 +142,7 @@ input.login {
     background-image: url("../images/controls/logout.png");
 }
     
-.remove {
+.remove, .remove.clipped {
     position: absolute;
     right: 10px;
     height: 20px;
@@ -152,7 +152,7 @@ input.login {
     cursor: pointer;
 }
 
-.remove:hover {
+.remove:hover, .remove.clipped:hover {
     background-image: url("../images/controls/remove_hover.png");
 }
 

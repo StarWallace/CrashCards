@@ -9,8 +9,7 @@
         "message" => ""
     );
     
-    $authError = "You must be logged in to publish this deck.";
-    $publishedError = "This deck has already been published.";
+    $authError = "You must be logged in to delete this deck.";
     
 	$db = new SQLAccess();
     $deckid = $_REQUEST['deckid'];
@@ -19,9 +18,6 @@
     if (!isset($_COOKIE['user'])) {
         // User not logged in
         $result['message'] = $authError;
-    } else if ($deck->pubed == 1) {
-        // Deck already published
-        $result['message'] = $publishedError;
     } else {
         $user = unserialize($_COOKIE['user']);
         $creatorid = $user->uid;
@@ -29,12 +25,10 @@
             // User not creator of deck
             $result['message'] = $authError;
         } else {
-            // User is able to publish
-            $stmt = $db->dbConnect->prepare("UPDATE ccDecks SET tstamp=CURDATE(), pubed = 1 WHERE deckid = ?");
-            $stmt->bind_param('i', $deck->deckid);
-            $publish = $stmt->execute();
-            
-            if ($publish) {
+            // User is able to delete
+            $deleteDeck = $db->deleteQuery("ccDecks", "deckid = $deckid");
+            $deleteClip = $db->deleteQuery("ccClips", "deckid = $deckid");
+            if ($deleteDeck) {
                 $result['success'] = "1";
             }
         }

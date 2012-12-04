@@ -98,7 +98,7 @@
                 if ($sFieldName != $sPrimaryKey)
                 {
                     $sQryStatement .= $sFieldName . "='" .
-                            $this->dbConnect->real_escape_string ($sFieldValue) . "', ";
+                        $this->dbConnect->real_escape_string ($sFieldValue) . "', ";
                 }
             }
             $sQryStatement = rtrim($sQryStatement, ", ");
@@ -156,7 +156,7 @@
             //Check to see if it executed with errors or not
             if(!$qryResult)
             {
-                echo "<p>Query Failed: " . $this->dbConnect->error . "</p>";
+                return "Query Failed: " . $this->dbConnect->error;
                 exit();
             }
             
@@ -311,7 +311,7 @@
          *************************************************************/
         function __destruct()
         {
-            $this->dbConnect->close();
+            @$this->dbConnect->close();
         }
     }//end of class
 ?>

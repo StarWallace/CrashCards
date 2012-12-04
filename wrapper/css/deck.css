@@ -115,3 +115,11 @@
 .clip:hover {
     background-image: url("../images/controls/clip_hover.png");
 }
+
+.clipped {
+    background-image: url("../images/controls/clipped.png") !important;
+}
+
+.clipped:hover {
+    background-image: url("../images/controls/clipped_hover.png") !important;
+}

@@ -62,7 +62,7 @@ class User {
 	{
 		//query for a list of all clipped decks
 		$qryClips = $this->db->selectQuery("deckid", "ccClips", "uid = " . $this->uid);
-		$sRows = $qryClips->num_rows;
+		$nRows = $qryClips->num_rows;
 		//array to store the result
 		$aResult = Array();
 		
@@ -77,6 +77,25 @@ class User {
 		
 		return $aResult;
 	}
+    
+ 	/************************************************************
+	*FUNCTION:    GetDecks
+	*PURPOSE:     To get an array of the user's created decks
+	*NOTES:		  This function assumes that the user object has been filled with valid user data
+	*RETURN:      An array of all decks by this user
+	************************************************************/
+    function GetDecks() {
+        $qryDecks = $this->db->selectQuery("*", "ccDecks", "creatorid = '" . $this->uid . "'");
+        $nRows = $qryDecks->num_rows;
+        $aResult = Array();
+        
+        for ($i = 0; $i < $nRows; $i++)
+        {
+            $aResult[$i] = $qryDecks->fetch_assoc();
+        }
+        
+        return $aResult;
+    }
 	
 	/************************************************************
 	*FUNCTION:    LogDeckView

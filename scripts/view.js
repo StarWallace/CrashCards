@@ -1,6 +1,5 @@
 
 // Global variables
-var deck;
 var properties;
 
 // Execute when page is ready
@@ -23,24 +22,12 @@ function createDeck() {
     // Will need a JavaScript function to AJAX some XML file to load as new deck
     
     // These are all standard values (unless we want to load user's last/best score from database)
-    deck = new Object();
     deck.currentIndex = 0;
     deck.relativeIndex = 0;
     deck.numberCorrect = 0;
     deck.lastScore = 0;
     deck.bestScore = -1;
     
-    // These will depend on deck passed from AJAX
-    deck.cards = new Array();
-    deck.size = 4;
-
-    // This is just for testing/example purposes
-    for (var i = 0; i < deck.size; i++) {
-        deck.cards[i] = new Object();
-        deck.cards[i].question = "Question " + (i + 1);
-        deck.cards[i].answer = "Answer " + (i + 1);
-        deck.cards[i].done = false;
-    }
     deck.notDoneCount = deck.size;
     deck.unshown = deck.cards;
 }

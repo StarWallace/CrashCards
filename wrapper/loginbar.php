@@ -2,7 +2,7 @@
 
 <?php
     $loginResult = "";
-    if (isset($_POST) && (isset($_POST['username']) || isset($_POST['password']))) {
+    if ((isset($_POST['username']) || isset($_POST['password'])) && !isset($_POST['confirm'])) {
         $user = isset($_POST['username']) ? $_POST['username'] : "";
         $pass = isset($_POST['password']) ? $_POST['password'] : "";
         require_once("classes/User.class.php");

@@ -1,7 +1,7 @@
 ﻿<?php
     require_once("classes/User.class.php");
-    session_start();
-    $displayName = $_SESSION['display_name'];
+    $user = unserialize($_COOKIE['user']);
+    $displayName = $user->GetDisplayName();
 ?>
 
 <div class="top fixed" id="topBar">
