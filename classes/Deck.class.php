@@ -137,7 +137,9 @@ class Deck
         try {
             //path string for the deck location and name
             $deckPath = $_SERVER['DOCUMENT_ROOT'] . "/decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
-			echo $deckPath;
+			//echo "<script>alert('$deckPath');</script>";
+			//$deckPath = "decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
+			//echo $deckPath;
             //open file handler, will be created if it does not exist
             $fp = fopen($deckPath, "w+");
             //write xml into file

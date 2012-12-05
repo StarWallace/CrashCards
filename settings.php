@@ -32,7 +32,7 @@
 			$error = $updateResult;
 		}
     }
-echo "Magic quotes is " . (get_magic_quotes_gpc() ? "ON" : "OFF");
+//echo "Magic quotes is " . (get_magic_quotes_gpc() ? "ON" : "OFF");
 ?>
 
 <div class="left bold title">Settings</div>
