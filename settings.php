@@ -9,8 +9,11 @@
     if (!isset($_COOKIE['user'])) {
         header('Location: /');
     } else {
-        $user = unserialize($_COOKIE['user']);
-        //$user = new User($user->uid);
+		//$user = unserialize($_COOKIE['user']);
+		$user = $_COOKIE['userid'];
+        $user = new User($user);
+
+		//echo "<script>alert('$user->uid " . $_COOKIE['userjson'] . "');</script>";
 		//echo "" . $user->email ." ". $user->name ." ". $user->alias;
     }
 	
@@ -29,7 +32,7 @@
 			$error = $updateResult;
 		}
     }
-
+echo "Magic quotes is " . (get_magic_quotes_gpc() ? "ON" : "OFF");
 ?>
 
 <div class="left bold title">Settings</div>

@@ -6,7 +6,9 @@
 	$db = new SQLAccess();
     
     if (isset($_COOKIE['user'])) {
-        $user = unserialize($_COOKIE['user']);
+        //$user = unserialize($_COOKIE['user']);
+		$user = $_COOKIE['userid'];
+        $user = new User($user);
         $uid = $user->uid;
         $query = "SELECT d.*, (SELECT COUNT(*) FROM ccClips c WHERE c.uid=$uid AND c.deckid = d.deckid) AS clipped FROM ccDecks d WHERE pubed = 1 ";
     } else {

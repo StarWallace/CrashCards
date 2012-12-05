@@ -19,7 +19,9 @@
 	
     if (isset($_COOKIE['user'])) {
         if (isset($_REQUEST['deckid'])) {
-            $user = unserialize($_COOKIE['user']);
+            //$user = unserialize($_COOKIE['user']);
+			$user = $_COOKIE['userid'];
+			$user = new User($user);
             //get passed data
             $deckid = $_REQUEST['deckid'];
             $deck = new Deck($deckid);

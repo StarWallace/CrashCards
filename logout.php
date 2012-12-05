@@ -1,14 +1,17 @@
 <?php
+	ob_start();
     require_once("classes/User.class.php");
 	
 	$sugar = crypt($_COOKIE['user']);
 	echo $_COOKIE['user'];
 	
-    //$User = new User();
-	$User = unserialize($_COOKIE['user']);
-	if (is_object($User))
+	//$user = unserialize($_COOKIE['user']);
+	$user = $_COOKIE['userid'];
+    $user = new User($user);
+	
+	if (is_object($user))
 	{
-		$User->Logout();
+		$user->Logout();
 	}
 	echo $_COOKIE['user'];
 	

@@ -9,7 +9,9 @@
     
 	$db = new SQLAccess();
     if (isset($_COOKIE['user'])) {
-        $user = unserialize($_COOKIE['user']);
+        //$user = unserialize($_COOKIE['user']);
+		$user = $_COOKIE['userid'];
+        $user = new User($user);
     }
     
     $result = array(
@@ -68,6 +70,7 @@
             $deck = new Deck($deckid);
             $result['id'] = $deckid;
             
+			echo $xml;
             //save the deck
             $saveDeck = $deck->SaveDeckXML($xml);                
             if (!$saveDeck) {

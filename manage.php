@@ -9,8 +9,9 @@
     if (!isset($_COOKIE['user'])) {
         header('Location: /');
     } else {
-        $user = unserialize($_COOKIE['user']);
-        $user = new User($user->uid);
+        //$user = unserialize($_COOKIE['user']);
+		$user = $_COOKIE['userid'];
+        $user = new User($user);
     }
     
     $decks = $user->GetDecks();

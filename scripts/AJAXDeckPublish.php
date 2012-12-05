@@ -23,7 +23,9 @@
         // Deck already published
         $result['message'] = $publishedError;
     } else {
-        $user = unserialize($_COOKIE['user']);
+        //$user = unserialize($_COOKIE['user']);
+		$user = $_COOKIE['userid'];
+        $user = new User($user);
         $creatorid = $user->uid;
         if ($creatorid != $deck->creatorid) {
             // User not creator of deck

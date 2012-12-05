@@ -31,8 +31,10 @@
     } else if (!isset($_COOKIE['user'])) {
         $result["message"] = "You must be logged in to vote for this deck.";
     } else {
-        $user = unserialize($_COOKIE['user']);
-        
+        //$user = unserialize($_COOKIE['user']);
+		$user = $_COOKIE['userid'];
+        $user = new User($user);
+		
         //get passed data
         $uid = $user->uid;
         $isupv = $_REQUEST['isupv'];

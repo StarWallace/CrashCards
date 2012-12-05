@@ -1,12 +1,19 @@
 -- Database: 'CrashCards'
 -- --------------------------------------------------------
+DROP TABLE IF EXISTS ccClips CASCADE;
+DROP TABLE IF EXISTS ccViews CASCADE;
+DROP TABLE IF EXISTS ccVotes CASCADE;
+DROP TABLE IF EXISTS ccDecks CASCADE;
+DROP TABLE IF EXISTS ccCourses CASCADE;
+DROP TABLE IF EXISTS ccSubjects CASCADE;
+DROP TABLE IF EXISTS ccUsers CASCADE;
 
 --
--- Table structure for table 'cccourses'
+-- Table structure for table 'ccCourses'
 --
 
-DROP TABLE IF EXISTS cccourses CASCADE;
-CREATE TABLE IF NOT EXISTS cccourses (
+
+CREATE TABLE IF NOT EXISTS ccCourses (
   coursecode varchar(6) NOT NULL,
   `subject` varchar(25) NOT NULL,
   PRIMARY KEY (coursecode),
@@ -16,15 +23,15 @@ CREATE TABLE IF NOT EXISTS cccourses (
 -- --------------------------------------------------------
 
 --
--- Table structure for table 'ccdecks'
+-- Table structure for table 'ccDecks'
 --
 
-DROP TABLE IF EXISTS ccdecks CASCADE;
-CREATE TABLE IF NOT EXISTS ccdecks (
+
+CREATE TABLE IF NOT EXISTS ccDecks (
   deckid int(10) NOT NULL AUTO_INCREMENT,
   creatorid int(10) NOT NULL,
   title varchar(25) NOT NULL,
-  coursecode varchar(6) NOT NULL,
+  coursecode varchar(7) NOT NULL,
   `subject` varchar(25) NOT NULL,
   tstamp datetime NOT NULL,
   upv int(5) NOT NULL DEFAULT '0',
@@ -40,11 +47,11 @@ CREATE TABLE IF NOT EXISTS ccdecks (
 -- --------------------------------------------------------
 
 --
--- Table structure for table 'ccsubjects'
+-- Table structure for table 'ccSubjects'
 --
 
-DROP TABLE IF EXISTS ccsubjects CASCADE;
-CREATE TABLE IF NOT EXISTS ccsubjects (
+
+CREATE TABLE IF NOT EXISTS ccSubjects (
   `subject` varchar(25) NOT NULL,
   PRIMARY KEY (`subject`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -52,11 +59,11 @@ CREATE TABLE IF NOT EXISTS ccsubjects (
 -- --------------------------------------------------------
 
 --
--- Table structure for table 'ccusers'
+-- Table structure for table 'ccUsers'
 --
 
-DROP TABLE IF EXISTS ccusers CASCADE;
-CREATE TABLE IF NOT EXISTS ccusers (
+
+CREATE TABLE IF NOT EXISTS ccUsers (
   uid int(10) NOT NULL AUTO_INCREMENT,
   email varchar(100) NOT NULL,
   `name` varchar(25) NOT NULL,
@@ -69,11 +76,11 @@ CREATE TABLE IF NOT EXISTS ccusers (
 -- --------------------------------------------------------
 
 --
--- Table structure for table 'ccvotes'
+-- Table structure for table 'ccVotes'
 --
 
-DROP TABLE IF EXISTS ccvotes CASCADE;
-CREATE TABLE IF NOT EXISTS ccvotes (
+
+CREATE TABLE IF NOT EXISTS ccVotes (
   deckid int(10) NOT NULL,
   uid int(10) NOT NULL,
   isupv tinyint(1) NOT NULL,
@@ -85,11 +92,11 @@ CREATE TABLE IF NOT EXISTS ccvotes (
 -- --------------------------------------------------------
 
 --
--- Table structure for table 'ccclips'
+-- Table structure for table 'ccClips'
 --
 
-DROP TABLE IF EXISTS ccclips CASCADE;
-CREATE TABLE IF NOT EXISTS ccclips (
+
+CREATE TABLE IF NOT EXISTS ccClips (
   uid int(10) NOT NULL,
   deckid int(10) NOT NULL,
   PRIMARY KEY (uid,deckid),
@@ -100,11 +107,11 @@ CREATE TABLE IF NOT EXISTS ccclips (
 -- --------------------------------------------------------
 
 --
--- Table structure for table 'ccviews'
+-- Table structure for table 'ccViews'
 --
 
-DROP TABLE IF EXISTS ccviews CASCADE;
-CREATE TABLE IF NOT EXISTS ccviews (
+
+CREATE TABLE IF NOT EXISTS ccViews (
   deckid int(10) NOT NULL,
   uid int(10) NOT NULL,
   PRIMARY KEY (deckid,uid),
@@ -113,36 +120,36 @@ CREATE TABLE IF NOT EXISTS ccviews (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Constraints for table `cccourses`
+-- Constraints for table `ccCourses`
 --
-ALTER TABLE `cccourses`
-  ADD CONSTRAINT cccourses_ibfk_1 FOREIGN KEY (`subject`) REFERENCES ccsubjects (`subject`);
+ALTER TABLE `ccCourses`
+  ADD CONSTRAINT ccCourses_ibfk_1 FOREIGN KEY (`subject`) REFERENCES ccSubjects (`subject`);
 
 --
--- Constraints for table `ccdecks`
+-- Constraints for table `ccDecks`
 --
-ALTER TABLE `ccdecks`
-  ADD CONSTRAINT ccdecks_ibfk_4 FOREIGN KEY (`subject`) REFERENCES ccsubjects (`subject`),
-  ADD CONSTRAINT ccdecks_ibfk_2 FOREIGN KEY (creatorid) REFERENCES ccusers (uid) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT ccdecks_ibfk_3 FOREIGN KEY (coursecode) REFERENCES cccourses (coursecode);
+ALTER TABLE `ccDecks`
+  ADD CONSTRAINT ccDecks_ibfk_4 FOREIGN KEY (`subject`) REFERENCES ccSubjects (`subject`),
+  ADD CONSTRAINT ccDecks_ibfk_2 FOREIGN KEY (creatorid) REFERENCES ccUsers (uid) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT ccDecks_ibfk_3 FOREIGN KEY (coursecode) REFERENCES ccCourses (coursecode);
 
 --
--- Constraints for table `ccvotes`
+-- Constraints for table `ccVotes`
 --
-ALTER TABLE `ccvotes`
-  ADD CONSTRAINT ccvotes_ibfk_2 FOREIGN KEY (uid) REFERENCES ccusers (uid) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT ccvotes_ibfk_1 FOREIGN KEY (deckid) REFERENCES ccdecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ccVotes`
+  ADD CONSTRAINT ccVotes_ibfk_2 FOREIGN KEY (uid) REFERENCES ccUsers (uid) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT ccVotes_ibfk_1 FOREIGN KEY (deckid) REFERENCES ccDecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `ccclips`
+-- Constraints for table `ccClips`
 --
-ALTER TABLE `ccclips`
-  ADD CONSTRAINT ccclips_ibfk_2 FOREIGN KEY (deckid) REFERENCES ccdecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT ccclips_ibfk_1 FOREIGN KEY (uid) REFERENCES ccusers (uid) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ccClips`
+  ADD CONSTRAINT ccClips_ibfk_2 FOREIGN KEY (deckid) REFERENCES ccDecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT ccClips_ibfk_1 FOREIGN KEY (uid) REFERENCES ccUsers (uid) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `ccviews`
+-- Constraints for table `ccViews`
 --
-ALTER TABLE `ccviews`
-  ADD CONSTRAINT ccviews_ibfk_2 FOREIGN KEY (uid) REFERENCES ccusers (uid) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT ccviews_ibfk_1 FOREIGN KEY (deckid) REFERENCES ccdecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ccViews`
+  ADD CONSTRAINT ccViews_ibfk_2 FOREIGN KEY (uid) REFERENCES ccUsers (uid) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT ccViews_ibfk_1 FOREIGN KEY (deckid) REFERENCES ccDecks (deckid) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -48,6 +48,7 @@ class Deck
 		$this->deckid = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($deckid)));
 		$this->creatorid = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($creatorid)));	
 		$this->title = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($title)));
+		//$this->title = htmlspecialchars(strip_tags($title));
 		$this->coursecode = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($coursecode)));
 		$this->subject = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($subject)));
 		$this->tstamp = $this->db->dbConnect->escape_string(htmlspecialchars(strip_tags($tstamp)));	
@@ -136,6 +137,7 @@ class Deck
         try {
             //path string for the deck location and name
             $deckPath = $_SERVER['DOCUMENT_ROOT'] . "/decks/" . $this->creatorid . "-" . $this->deckid . ".xml";
+			echo $deckPath;
             //open file handler, will be created if it does not exist
             $fp = fopen($deckPath, "w+");
             //write xml into file

@@ -356,6 +356,8 @@ class User {
 			//place a copy of the object as a cookie to track the logged in user
 			setcookie("user", serialize($this), time()+3600*24*365);
             $_COOKIE['user'] = serialize($this);
+			setcookie("userid", $this->uid, time()+3600*24*365);
+            $_COOKIE['userid'] = $this->uid;
 			setcookie("userjson", json_encode($this), time()+3600*24*365);
 			$_COOKIE['userjson'] = json_encode($this);
 			setcookie("useralias", $this->GetDisplayName(), time()+3600*24*365);
@@ -383,6 +385,12 @@ class User {
 			unset($_COOKIE['user']);
 			echo "done user<br />";
 		}
+		if (isset($_COOKIE['userid']))
+		{
+			setcookie("userid", "", time() - 42000);
+			unset($_COOKIE['userid']);
+			echo "done userid<br />";
+		}
 		if (isset($_COOKIE['userjson']) )
 		{
 			setcookie("userjson", "", time() - 42000);
@@ -409,6 +417,8 @@ class User {
 		{
 			setcookie("user", serialize($this), time()+3600*24*365);
             $_COOKIE['user'] = serialize($this);
+			setcookie("userid", $this->uid, time()+3600*24*365);
+            $_COOKIE['userid'] = $this->uid;
 			setcookie("userjson", json_encode($this), time()+3600*24*365);
 			$_COOKIE['userjson'] = json_encode($this);
 			setcookie("useralias", $this->GetDisplayName(), time()+3600*24*365);
