@@ -1,8 +1,4 @@
-<?php 
-	/*
-	* When using the wrapper system this must be called at the top of every page.
-	* It basically just says to "start output"
-	*/
+<?php
 	ob_start(); 
 ?>	
 
@@ -10,14 +6,6 @@
     function __autoload($sClassName) {
         require_once("classes/$sClassName.class.php");
     }
-    
-    // Just used as an example
-    // Results will be fetched from the database based on some default filtering and sort order
-    // (e.g., some combination of new and highly-rated notes, possibly personalized for the user)
-    // Future results will depend on the search and filter parameters
-    
-    $db = new SQLAccess();
-    $result = $db->selectQuery("*", "ccDecks", "pubed=1", "upv-dnv DESC");
 ?>
 
 <link rel="stylesheet" type="text/css" href="wrapper/css/browse.css"/>
@@ -56,67 +44,8 @@
 </div>
 <br/>
 <div id="deckList">
-
 	<?php
-        for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-            $deck = mysqli_fetch_assoc($result);
-            $user = new User($deck['creatorid']);
-	?>
-	
-	<div class="browseItem" deckid="<?php echo $deck['deckid']; ?>">
-        <div class="vote">
-            <div class="scores">
-                <div class="up score">
-                    <?php echo $deck['upv']; ?>
-                </div>
-                <div class="down score">
-                    <?php echo $deck['dnv']; ?>
-                </div>
-            </div>
-            <div class="voteControls">
-                <div class="up control"></div>
-                <div class="down control"></div>
-            </div>
-        </div>
-        <div class="deckTag">
-            <a href="
-                <?php echo "view.php?deckid=" . $deck['deckid']; ?>
-            ">
-                <div class="halfRow link">
-                    <div class="title corner-spaced">
-                        <?php echo $deck['title']; ?>
-                    </div>
-                </div>
-            </a>
-            <div class="halfRow">
-                <div class="info">
-                    <br/>
-                    <?php echo $deck['subject'] . " - " . $deck['coursecode'] . " - " . substr($deck['tstamp'], 0, 4); ?>
-                </div>
-            </div>
-        </div>
-        <div class="userTag">
-            <a href="
-                <?php echo "#"; ?>
-            ">
-                <div id="userName" class="halfRow link corner-spaced">
-                    <div class="bold">
-                        <?php echo $user->GetDisplayName(); ?>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div
-            class="clip" deckid="<?php echo $deck['deckid']; ?>"
-        >
-        
-        <!-- FROM PHP, ADD TO DECK ARRAY WHETHER THE DECK IS CLIPPED BY THE CURRENT USER -->
-        
-        </div>
-	</div>
-	
-	<?php
-		}
+        require_once("scripts/AJAXBrowse.php");
 	?>
 </div>
 

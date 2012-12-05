@@ -162,8 +162,6 @@ function saveDeck(publish) {
     
     $xml.append($deck);
     
-    alert($xml.html());
-    
     var ajaxData = new Object();
     ajaxData.title = $("#deckTitle").val();
     ajaxData.coursecode = $("#deckCourseCode").val();
