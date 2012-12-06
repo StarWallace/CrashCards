@@ -29,7 +29,11 @@ function loadBrowseList(more, subject, coursecode, year, sort, index) {
     
     request.done( function(result) {
         if (result == "") {
-            $("#moreResults").html("No More Results");
+            if (more) {
+                $("#moreResults").html("No More Results");
+            } else {
+                $("#deckList").append(result);
+            }
         } else {
             if (more) {
                 $("#deckList").append(result);
