@@ -161,7 +161,10 @@ input.login {
     /*********************
         COMMON CLASSES
     *********************/
-    
+
+.text-centred {
+    text-align: center;
+}
 .centred {
     margin-left: auto !important;
     margin-right: auto !important;

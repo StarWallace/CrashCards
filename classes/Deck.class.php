@@ -161,6 +161,17 @@ class Deck
     function IsCreator($uid) {
         return $this->creatorid == $uid;
     }
+
+	/************************************************************
+	*FUNCTION:    IsClippedBy
+	*PURPOSE:     Call to check if deck is clipped by user with given uid
+	*RETURN:      True if deck is clipped by user, false otherwise
+	************************************************************/    
+    function IsClippedBy($uid) {
+        //$qryClip = $this->db->selectQuery("*", "ccClips", "deckid=" . $this->deckid . " AND uid=$uid");
+        $qryClip = $this->db->runQuery("SELECT * FROM ccClips WHERE deckid=" . $this->deckid . " AND uid=$uid");
+        return $qryClip->num_rows == 1;
+    }
 	
 	/************************************************************
 	*FUNCTION:    CheckDupUser

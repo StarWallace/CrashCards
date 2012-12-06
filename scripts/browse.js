@@ -1,76 +1,60 @@
-$(".vote").hover(
-    function() {
-        var index = $(".vote").index($(this));
-        $(".voteControls").eq(index).show();
-        $(".scores").eq(index).hide();
-    },
+var browseIndex = 10;
     
-    function() {
-        var index = $(".vote").index($(this));
-        $(".scores").eq(index).show();
-        $(".voteControls").eq(index).hide();
+function loadBrowseList(more, subject, coursecode, year, sort, index) {
+    if (subject == null) {
+        subject = $("#subject option:selected").val();
     }
-);
-
-$(".up.control, .down.control").click( function() {
-    $el = $(this);
-    if ($(this).hasClass("up")) {
-        var upv = 1;
-    } else if ($(this).hasClass("down")) {
-        var upv = 0;
+    if (coursecode == null) {
+        coursecode = $("#courseCode option:selected").val();
     }
-    var deckid = $(this).parent().parent().parent().attr("deckid");
+    if (year == null) {
+        year = $("#year option:selected").val();
+    }
+    if (sort == null) {
+        sort = $("#sortOrder option:selected").val();
+    }
+    if (index == null) {
+        index = browseIndex;
+    }
     var request = $.ajax({
-        type: "POST",
-        url: "scripts/AJAXSendVote.php",
+        url: "scripts/AJAXBrowse.php",
         data: {
-            deckid: $(this).parent().parent().parent().attr("deckid"),
-            isupv: upv
+            subject: subject != "" ? subject : null,
+            coursecode: coursecode != "" ? coursecode : null,
+            year: year != "" ? year : null,
+            sort: sort,
+            index: index
         }
     });
     
     request.done( function(result) {
-        var success = JSON.parse(result).success;
-        if (success == "1") {
-            $scores = $el.parent().parent().find(".scores")
-            $scores.find(".up").html(JSON.parse(result).up);
-            $scores.find(".down").html(JSON.parse(result).down);
+        if (result == "") {
+            $("#moreResults").html("No More Results");
         } else {
-            $("#message").html(JSON.parse(result).message);
-            $("#message").addClass("err");
+            if (more) {
+                $("#deckList").append(result);
+            } else {
+                $("#deckList").html(result);
+            }
+            
+            // From vote.js
+            attachVoteHover();
+            attachVoteClick();
+            
+            // From clip.js
+            attachClipClick();
+            
+            browseIndex += 10;
         }
     });
-    
-    request.fail( function(result) {
-        $("#message").html(JSON.parse(result).message);
-        $("#message").addClass("err");
-    });    
+}
+
+$("#browseNav select").change( function() {
+    $("#moreResults").html("More Results");
+    browseIndex = 0;
+    loadBrowseList();
 });
 
-$(".clip").click( function() {
-    $el = $(this);
-    var request = $.ajax({
-        type: "POST",
-        url: "scripts/AJAXClipDeck.php",
-        data: {
-            deckid: $(this).attr("deckid")
-        }
-    });
-    
-    request.done( function(result) {
-        var success = JSON.parse(result).success;
-        if (success == "1") {
-            $el.addClass("clipped");
-        } else if (success == "2") {
-            $el.removeClass("clipped");
-        } else {
-            $("#message").html(JSON.parse(result).message);
-            $("#message").addClass("err");
-        }
-    });
-    
-    request.fail( function(result) {
-        $("#message").html(JSON.parse(result).message);
-        $("#message").addClass("err");
-    });
+$("#moreResults").click( function() {
+    loadBrowseList(true);
 });

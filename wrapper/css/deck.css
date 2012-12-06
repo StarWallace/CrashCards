@@ -108,6 +108,7 @@
 .clip {
     float: right !important;
     width: 50px;
+    height: 75px;
     cursor: pointer;
     background-image: url("../images/controls/clip.png");
 }

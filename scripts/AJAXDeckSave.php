@@ -70,7 +70,6 @@
             $deck = new Deck($deckid);
             $result['id'] = $deckid;
             
-			echo $xml;
             //save the deck
             $saveDeck = $deck->SaveDeckXML($xml);                
             if (!$saveDeck) {

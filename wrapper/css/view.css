@@ -1,27 +1,30 @@
-.debugInfo {
-    height: 30px;
-    width: 600px;
-    border: 1px solid black;
-}
 
 .viewDeck {
     width: 640px;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
+}
+
+.viewDeck #top-row {
+    height: 60px;
 }
 
 .viewDeck .deckInfo {
     margin: 15px;
+    max-width: 480px;
+    float: left;
 }
 
 .viewDeck .deckInfo .title {
     font-size: 1.5em;
+    max-width: 480px;
 }
 
 .viewDeck .deckInfo .creator {
     font-size: 0.8em;
+    max-width: 480px;
 }
 
 .viewDeck .card {
@@ -43,7 +46,7 @@
 .viewDeck #cardHolder {
     height: 360px;
     width: 640px;
-    margin: 15px 0 15px 0;
+    margin: 30px 0 15px 0;
     position: relative;
 }
 

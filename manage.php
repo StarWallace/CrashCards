@@ -194,7 +194,7 @@
             </div>
         </div>
         <div class="deckTag">
-            <a href="<?php echo "view.php/deckid=" . $deck->deckid; ?>">
+            <a href="<?php echo "view.php?deckid=" . $deck->deckid; ?>">
                 <div class="halfRow link">
                     <div class="title corner-spaced">
                         <?php echo $deck->title; ?>

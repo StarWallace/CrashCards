@@ -5,6 +5,7 @@
 	*/
 	ob_start();
     require_once("classes/Deck.class.php");
+    require_once("classes/User.class.php");
     
     if (!isset($_COOKIE['user'])) {
         // Not logged in

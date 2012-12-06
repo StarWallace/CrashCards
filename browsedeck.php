@@ -1,5 +1,5 @@
-<div class="browseItem" deckid="<?php echo $deck['deckid']; ?>">
-    <div class="vote">
+<div class="browseItem">
+    <div class="vote" deckid="<?php echo $deck['deckid']; ?>">
         <div class="scores">
             <div class="up score">
                 <?php echo $deck['upv']; ?>

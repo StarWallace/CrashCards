@@ -1,16 +1,35 @@
 <?php
     require_once("classes/User.class.php");
     $user = new User($deck->creatorid);
+    $clipped = $deck->isClippedBy($user->uid) ? 1 : 0;
 ?>
 
 <link rel="stylesheet" type="text/css" href="wrapper/css/view.css"/>
+<link rel="stylesheet" type="text/css" href="wrapper/css/deck.css"/>
 <script type="text/javascript" src="scripts/jquery.flippy.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.animate-shadow-min.js"></script>
 
 <div class="viewDeck">
-    <div class="deckInfo">
-        <div class="title"><?php echo $deck->title; ?></div>
-        <div class="creator">by <?php echo $user->GetDisplayName(); ?></div>
+    <div id="top-row">
+        <div class="vote" deckid="<?php echo $deck->deckid; ?>">
+            <div class="scores">
+                <div class="up score">
+                    <?php echo $deck->upv; ?>
+                </div>
+                <div class="down score">
+                    <?php echo $deck->dnv; ?>
+                </div>
+            </div>
+            <div class="voteControls">
+                <div class="up control"></div>
+                <div class="down control"></div>
+            </div>
+        </div>
+        <div class="deckInfo">
+            <div class="title"><?php echo $deck->title; ?></div>
+            <div class="creator">by <?php echo $user->GetDisplayName(); ?></div>
+        </div>
+        <div class="clip<?php echo $clipped == 1 ? " clipped" : "";?>" deckid="<?php echo $deck->deckid; ?>"></div>
     </div>
     <div id="cardHolder">
         <div class="white card">
@@ -67,4 +86,6 @@
         }
     ?>
 </script>
+<script type="text/javascript" src="scripts/vote.js"></script>
+<script type="text/javascript" src="scripts/clip.js"></script>
 <script type="text/javascript" src="scripts/view.js"></script>

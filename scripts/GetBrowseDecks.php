@@ -1,7 +1,7 @@
 <?php
     
-	require_once("../classes/SQLAccess.class.php");
-    require_once("../classes/User.class.php");
+	require_once("classes/SQLAccess.class.php");
+    require_once("classes/User.class.php");
     
 	$db = new SQLAccess();
     
@@ -92,7 +92,7 @@
                            
         while ($stmt->fetch()) {
             $user = new User($deck['creatorid']);
-            include("../browsedeck.php");
+            include("browsedeck.php");
         }
     } else {
         

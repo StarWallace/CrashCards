@@ -1,0 +1,30 @@
+.settingsInfo {
+    height: 150px;
+}
+
+.settingsInfo input {
+    width: 250px;
+    float: left;
+}
+
+.settingsInfo .label {
+    width: 60px;
+}
+
+.settingsInfo .column {
+    float: left;
+    padding: 20px;
+}
+
+.settingsInfo .row > div {
+    height: 30px;
+}
+
+.settingsInfo .fields {
+    padding: 20px;
+}
+
+.settingsInfo #error {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
