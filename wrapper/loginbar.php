@@ -22,7 +22,8 @@
         <a href="index.php?"><div class="banner" title="CrashCards"></div></a>
         <div class="loginBar">
             <div id="loginMessage" class="err"><?php echo $loginResult; ?></div>
-            <form id="login-form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST">
+            <!-- <form id="login-form" action="<php echo $_SERVER['REQUEST_URI']; ?>" method="POST"> -->
+			<form id="login-form" action="index.php" method="POST">
                 <input name="email" class="login" placeholder="Email" tabindex="101"/>
                 <input name="password" class="login" type="password" placeholder="Password" tabindex="102"/>
                 <div id="login" class="button" tabindex="103">Log In</div>
