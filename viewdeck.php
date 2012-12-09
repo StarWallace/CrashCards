@@ -1,6 +1,8 @@
 <?php
     require_once("classes/User.class.php");
-    $user = new User($deck->creatorid);
+    $creator = new User($deck->creatorid);
+    $user = $_COOKIE['userid'];
+    $user = new User($user);
     $clipped = $deck->isClippedBy($user->uid) ? 1 : 0;
 ?>
 
@@ -27,7 +29,7 @@
         </div>
         <div class="deckInfo">
             <div class="title"><?php echo $deck->title; ?></div>
-            <div class="creator">by <?php echo $user->GetDisplayName(); ?></div>
+            <div class="creator">by <?php echo $creator->GetDisplayName(); ?></div>
         </div>
         <div class="clip<?php echo $clipped == 1 ? " clipped" : "";?>" deckid="<?php echo $deck->deckid; ?>"></div>
     </div>
