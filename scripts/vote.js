@@ -1,37 +1,13 @@
 var browseIndex = 10;
 
 $(document).ready( function() {
-    attachVoteHover();
     attachVoteClick();
 });
-
-function attachVoteHover() {
-    $(".vote").hover(
-        function() {
-            voteMouseEnter($(this));
-        },
-        function() {
-            voteMouseLeave($(this));
-        }
-    );
-};
 
 function attachVoteClick() {
     $(".up.control, .down.control").click( function() {
         voteClick($(this));
     });
-}
-
-function voteMouseEnter($el) {
-    var index = $(".vote").index($el);
-    $(".voteControls").eq(index).show();
-    $(".scores").eq(index).hide();
-};
-
-function voteMouseLeave($el) {
-    var index = $(".vote").index($el);
-    $(".scores").eq(index).show();
-    $(".voteControls").eq(index).hide();
 }
 
 function voteClick($el) {

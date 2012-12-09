@@ -58,27 +58,25 @@
 		foreach ($decks as $deck) {
 	?>
 	<div class="browseItem">
-        <div class="vote">
+        <div class="vote" deckid="<?php echo $deck['deckid']; ?>">
+            <?php
+                if ($deck['pubed'] == "1") {
+            ?>
             <div class="scores">
                 <div class="up score">
-                    <?php
-                        if ($deck['pubed'] == "1") {
-                            echo $deck['upv'];
-                        }
-                    ?>
+                    <?php echo $deck['upv']; ?>
                 </div>
                 <div class="down score">
-                    <?php
-                        if ($deck['pubed'] == "1") {
-                            echo $deck['dnv'];
-                        }
-                    ?>
+                    <?php echo $deck['dnv']; ?>
                 </div>
             </div>
             <div class="voteControls">
                 <div class="up control"></div>
                 <div class="down control"></div>
             </div>
+            <?php
+                }
+            ?>
         </div>
         <div class="deckTag">
             <a href="
@@ -239,3 +237,4 @@
 ?>
 
 <script type="text/javascript" src="scripts/manage.js"></script>
+<script type="text/javascript" src="scripts/vote.js"></script>

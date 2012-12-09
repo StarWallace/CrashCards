@@ -10,29 +10,29 @@
         <div class="column">
             <div class="row">
                 <div class="label"><label for="deckTitle">Title</label></div>
-                <input id="deckTitle"
+                <input id="deckTitle" maxlength="25"
                        value="<?php echo isset($deck) ? $deck->title : ""; ?>"
                 />
                 <div class="info-tooltip" id="titleInfo"
-                     help="Example help text for deck title"
+                     help="What topic(s) will be covered in this deck? What title do you want displayed when your deck is listed in search results?"
                 ></div>
             </div>
             <div class="row">
                 <div class="label"><label for="deckSubject">Subject</label></div>
-                <input id="deckSubject"
+                <input id="deckSubject" maxlength="25"
                        value="<?php echo isset($deck) ? $deck->subject : ""; ?>"
                 />
                 <div class="info-tooltip" id="subjectInfo"
-                     help="Example help text for subject"
+                     help="What subject does this deck best fit into?"
                 ></div>
             </div>
             <div class="row">
                 <div class="label"><label for="deckCourseCode">Course Code</label></div>
-                <input id="deckCourseCode"
+                <input id="deckCourseCode" maxlength="7"
                        value="<?php echo isset($deck) ? $deck->coursecode : ""; ?>"
                 />
                 <div class="info-tooltip" id="courseCodeInfo"
-                     help="Example help text for course info"
+                     help="Which course is this deck being made for?"
                 ></div>
             </div>
         </div>

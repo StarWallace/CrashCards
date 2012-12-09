@@ -8,7 +8,6 @@
         header('Location: /');
     } else {
         // Set user object
-        //$user = unserialize($_COOKIE['user']);
 		$user = $_COOKIE['userid'];
         $user = new User($user);
         if (isset($_GET['deckid'])) {

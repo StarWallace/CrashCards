@@ -90,7 +90,7 @@ function doUpdate() {
         
         if (document.getElementById("repeatUntilPerfect").checked) {
             if (deck.numberCorrect == deck.notDoneCount) {
-                alert("YOU GOT THEM ALL RIGHT!");
+            alert("You're done. Final score: " + $("#score").html());
                 cleanUp();
             } else {
                 resetDeck();

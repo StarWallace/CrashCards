@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS ccUsers CASCADE;
 
 
 CREATE TABLE IF NOT EXISTS ccCourses (
-  coursecode varchar(6) NOT NULL,
+  coursecode varchar(7) NOT NULL,
   `subject` varchar(25) NOT NULL,
   PRIMARY KEY (coursecode),
   KEY `subject` (`subject`)

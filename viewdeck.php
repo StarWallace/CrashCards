@@ -1,8 +1,5 @@
 <?php
     require_once("classes/User.class.php");
-    $creator = new User($deck->creatorid);
-    $user = $_COOKIE['userid'];
-    $user = new User($user);
     $clipped = $deck->isClippedBy($user->uid) ? 1 : 0;
 ?>
 

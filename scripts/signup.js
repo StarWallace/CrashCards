@@ -53,7 +53,7 @@ $("#password").change( function() {
     passwordChange();
 });
 
-$("#confirm").change( function() {
+$("#confirm").keyup( function() {
     confirmChange();
 });
 

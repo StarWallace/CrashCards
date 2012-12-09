@@ -7,6 +7,15 @@
         require_once("classes/$sClassName.class.php");
     }
     require_once("scripts/GetFullLists.php");
+    
+    if (isset($_COOKIE['userid'])) {
+        $user = $_COOKIE['userid'];
+        $user = new User($user);
+        $availableViews = $user->GetAvailableViewCount();
+    } else {
+        $availableViews = 0;
+    }
+    
 ?>
 
 <link rel="stylesheet" type="text/css" href="wrapper/css/browse.css"/>
@@ -16,7 +25,7 @@
     <h3>Browse</h3>
 </div>
 <div id="numberOfViews">
-    <h3>18 Available Views</h3>
+    <h3><?php echo $availableViews; ?> Available Views</h3>
 </div>
 <div class="floatLine"></div>
 

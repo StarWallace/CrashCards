@@ -105,22 +105,31 @@ class User {
 	/************************************************************
 	*FUNCTION:    LogDeckView
 	*PURPOSE:     To log a user's viewing of a deck intothe database
-	*NOTES:		  This function assumes that the user object has been filled with valid user data
+	*NOTES:		  This function assumes that the user object has been filled with valid user data.
+                  It is also assumed that the user is not the creator of the deck
+                  and that no view has yet been logged for the user/deck pair.
 	************************************************************/
 	function LogDeckView($deckid)
 	{
-		//check to see if this user owns the deck (if a deck is returned, then this user created this deck)
-		$qryOwner = $this->db->selectQuery("*", "ccDecks", "deckid = $deckid AND creatorid = " . $this->uid);
-		
-		//check the db for an existing view
-		$qryCheck = $this->db->selectQuery("*", "ccViews", "deckid = $deckid AND uid = " . $this->uid);
-		
-		//if this user is not the owner and no view exists
 		if ($qryOwner->num_rows < 1 && $qryCheck->num_rows < 1)
 		{
 			//insert the new view
 			$qryView = $this->db->insertQuery("ccViews", "deckid, uid", "$deckid, " . $this->uid);
 		}
+	}
+
+	/************************************************************
+	*FUNCTION:    HasViewedDeck
+	*PURPOSE:     Determine whether user has already logged a view for this deck
+	*NOTES:		  This function assumes that the user object has been filled with valid user data
+    *RETURN:      True if the user has already viewed this deck, false otherwise
+	************************************************************/
+	function HasViewedDeck($deckid)
+	{	
+		//check the db for an existing view
+		$qryCheck = $this->db->selectQuery("*", "ccViews", "deckid = $deckid AND uid = " . $this->uid);
+		
+        return $qryCheck->num_rows > 0 ? true : false;
 	}
 	
 	/************************************************************
@@ -136,7 +145,7 @@ class User {
 		$deckCount = $qryDecks->fetch_row();
 		$deckCount = $deckCount[0];
 		//multiply to determine views earned
-		$viewsEarned = ($deckCount * EARN_RATE) + EARN_RATE;
+		$viewsEarned = ($deckCount * User::EARN_RATE) + User::EARN_RATE;
 			//add a buffer of 1 EARN_RATE to account for new users
 		//get the count of this user's views
 		$qryViews = $this->db->selectQuery("COUNT(*)", "ccViews", "uid = " . $this->uid);
