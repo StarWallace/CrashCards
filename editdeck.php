@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="label"><label for="deckSubject">Subject</label></div>
-                <input id="deckSubject" maxlength="25"
+                <input id="deckSubject" class="hasSuggestions" maxlength="25"
                        value="<?php echo isset($deck) ? $deck->subject : ""; ?>"
                 />
                 <div class="info-tooltip" id="subjectInfo"
@@ -28,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="label"><label for="deckCourseCode">Course Code</label></div>
-                <input id="deckCourseCode" maxlength="7"
+                <input id="deckCourseCode" class="hasSuggestions" maxlength="7"
                        value="<?php echo isset($deck) ? $deck->coursecode : ""; ?>"
                 />
                 <div class="info-tooltip" id="courseCodeInfo"
@@ -97,6 +97,8 @@
     <div class="button saveDeck">Save</div>
     <div class="button" id="newCard">New Card</div>
 </div>
+
+<div id="suggestions" class="shadow"></div>
 
 
 <script type="text/javascript" src="scripts/edit.js"></script>

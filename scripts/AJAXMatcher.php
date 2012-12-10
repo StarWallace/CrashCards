@@ -52,7 +52,7 @@ if (isset($_REQUEST['for']) && isset($_REQUEST['sample']))
 		//print out the sujestion
 		echo "<li id='sugestion$i' class='sugestion'>" . $aRowVals[$for] . "</li>";
     }  
-	echo "</ul>"
+	echo "</ul>";
 	
 }
 ?>

@@ -1,6 +1,79 @@
 var enableRemove = true;
 var events = new Object();
 
+$("body").click( function(e) {
+    if (e.target.id != "deckSubject" && e.target.id != "deckCourseCode" && !$(e).parents().hasClass("sugestion")) {
+        $("#suggestions").html("").hide();
+    }
+});
+
+$("#deckCourseCode").keyup( function() {
+    $("#suggestions").show();
+    $("#suggestions").removeClass("subject");
+    $("#suggestions").addClass("coursecode");
+    loadSuggestions("coursecode", $(this));
+});
+
+$("#deckSubject").keyup( function() {
+    $("#suggestions").show();
+    $("#suggestions").removeClass("coursecode");
+    $("#suggestions").addClass("subject");
+    loadSuggestions("subject", $(this));
+});
+
+$(".hasSuggestions").focus( function() {
+    positionSuggestions($(this));
+    loadSuggestions("subject", $(this));
+});
+
+$("#deckCourseCode").focus( function() {
+    positionSuggestions($(this));
+    loadSuggestions("coursecode", $(this));
+});
+
+$(".hasSuggestions").blur( function() {
+    setTimeout( function() {
+        if (!$(".hasSuggestions").is(":focus")) {
+            $("#suggestions").html("").hide();
+        }
+    }, 200);
+});
+
+function loadSuggestions(field, $el) {
+    var request = $.ajax({
+        type: "POST",
+        url: "scripts/AJAXMatcher.php",
+        data: {
+            for: field,
+            sample: $el.val()
+        }
+    });
+    
+    request.done( function(result) {
+        $("#suggestions").html(result);
+        $("li.sugestion").click( function() {
+            if ($("#suggestions").hasClass("coursecode")) {
+                $("#deckCourseCode").val($(this).html());
+            }
+            if ($("#suggestions").hasClass("subject")) {
+                $("#deckSubject").val($(this).html());
+            }
+            $("#suggestions").html("").hide();
+            $("#suggestions").removeClass("coursecode").removeClass("subject");
+        });
+    });
+}
+
+function positionSuggestions($el) {
+    $("#suggestions").html("");
+    $("#suggestions").css("width", $el.outerWidth());
+    $("#suggestions").css("top", $el.position().top + $el.outerHeight() + 3);
+    $("#suggestions").css("left", $el.position().left);
+    $("#suggestions").removeClass("coursecode");
+    $("#suggestions").removeClass("subject");
+    $("#suggestions").show();
+}
+    
 events.remove = function(event) {
     event.stopPropagation();
     if (enableRemove) {

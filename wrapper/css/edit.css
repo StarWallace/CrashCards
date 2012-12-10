@@ -115,3 +115,26 @@
 .cardRow .remove {
     display: none;
 }
+
+#suggestions {
+    background-color: #ffffff;
+    position: absolute;
+    max-height: 200px;
+    overflow-y: scroll;
+    display: none;
+}
+
+ul.sugestion {
+    list-style: none;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+}
+
+li.sugestion {
+    padding: 5px;
+}
+
+li.sugestion:hover {
+    background-color: #dbdbdb;
+}
