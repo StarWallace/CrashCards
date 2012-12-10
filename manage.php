@@ -24,7 +24,7 @@
 
 <div id="tutorial" class="white h-spaced v-spaced separated">
     <div id="tutorialContent">
-        Don't see the deck you are looking for? When viewing a deck, click the gray paperclip icon  <img src="wrapper/images/controls/clip_thumb.png"> on a deck you wish to store on this page. Clipping decks allow you to easily keep track of the content you care about.
+        Don't see the deck you are looking for? When viewing a deck, click the gray paperclip icon  <img src="wrapper/images/controls/clip_thumb.png"> on the deck you wish to store on this page. Clipping decks allow you to easily keep track of the content you care about.
     </div>
     <div class="dismiss remove close"></div>
     <div class="dismiss bottom">
