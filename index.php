@@ -13,8 +13,10 @@
 <div class="floatLine"></div>
 
 <div class="white h-spaced" id="whatIsThis">
-    What is this??<br/>
-    This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. This is a bunch of stuff. 
+    <strong>Welcome to CrashCards</strong><br/>
+    <p>92% of students want better study habits.</p>
+
+    <p>Help us revolutionize study systems, peer collaboration and social note sharing. Join CrashCards and gain instant access to course note-taking material.</p>
 </div>
 
 <div class="h-spaced welcomeCard hand-font" id="welcomeCard1">
